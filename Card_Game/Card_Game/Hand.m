@@ -200,6 +200,151 @@ NSMutableDictionary * values;
         return -1;
     return ([values objectForKey:s1] > [values objectForKey:s2]) ? 1 : 0;
 }
+-(NSInteger) checkWinner: (Hand*) p1 p2:(Hand*) p2
+{
+    NSString* p1result = [p1 checkHand];
+    NSString* p2result = [p2 checkHand];
+
+    NSString* p1card0Num = [[p1.cardsInHand objectAtIndex:0] substringToIndex:1];
+    NSString* p1card1Num = [[p1.cardsInHand objectAtIndex:0] substringToIndex:1];
+    NSString* p1card2Num = [[p1.cardsInHand objectAtIndex:0] substringToIndex:1];
+    NSString* p1card3Num = [[p1.cardsInHand objectAtIndex:0] substringToIndex:1];
+    NSString* p1card4Num = [[p1.cardsInHand objectAtIndex:0] substringToIndex:1];
+
+    NSString* p2card0Num = [[p2.cardsInHand objectAtIndex:0] substringToIndex:1];
+    NSString* p2card1Num = [[p2.cardsInHand objectAtIndex:0] substringToIndex:1];
+    NSString* p2card2Num = [[p2.cardsInHand objectAtIndex:0] substringToIndex:1];
+    NSString* p2card3Num = [[p2.cardsInHand objectAtIndex:0] substringToIndex:1];
+    NSString* p2card4Num = [[p2.cardsInHand objectAtIndex:0] substringToIndex:1];
+    // 0 = p wins
+    // 1 = p2 wins
+
+    //royal flush
+    if ([p1result isEqualToString: @"RF"]) return 1;
+    if ([p2result isEqualToString: @"RF"]) return 0;
+
+    //straight flush
+    if ([p1result isEqualToString: @"SF"] && [p2result isEqualToString: @"SF"])
+    {
+        return [self compare:p1card0Num s2:p2card0Num];
+    }
+
+    if ([p1result isEqualToString: @"SF"]) return 1;
+    if ([p2result isEqualToString: @"SF"]) return 0;
+
+    //4 of a kind
+    if (([p1result isEqualToString: @"4K"]) && ([p2result isEqualToString: @"4K"]))
+    {
+        NSInteger result = [self compare:p1card0Num s2:p2card0Num];
+        if (result == -1)
+        {
+            return [self compare:p1card4Num s2:p2card4Num];
+        }
+        return result;
+    }
+
+    if ([p1result isEqualToString: @"4K"]) return 1;
+    if ([p2result isEqualToString: @"4K"]) return 0;
+
+    //full house
+    if (([p1result isEqualToString: @"FH"]) && ([p2result isEqualToString: @"FH"]))
+    {
+        NSInteger result = [self compare:p1card0Num s2:p2card0Num];
+        if (result == -1) 
+        {
+            return [self compare:p1card3Num s2:p2card3Num];
+        }
+        return result;
+    }
+
+    if ([p1result isEqualToString: @"FH"]) return 1;
+    if ([p2result isEqualToString: @"FH"]) return 0;
+
+    //flush
+    if ([p1result isEqualToString: @"F"] && [p2result isEqualToString: @"F"])
+    {
+        NSInteger result = [self compare:p1card4Num s2:p2card4Num];
+        if (result != -1) return result;
+        result = [self compare:p1card3Num s2:p2card3Num];
+        if (result != -1) return result;
+        result = [self compare:p1card2Num s2:p2card2Num];
+        if (result != -1) return result;
+        result = [self compare:p1card1Num s2:p2card1Num];
+        if (result != -1) return result;
+        result = [self compare:p1card0Num s2:p2card0Num];
+        if (result != -1) return result;
+    }
+    if ([p1result isEqualToString: @"F"]) return 1;
+    if ([p2result isEqualToString: @"F"]) return 0;
+
+    //straight
+    if ([p1result isEqualToString: @"S"] && [p2result isEqualToString: @"S"])
+    {
+        return [self compare:p1card4Num s2:p2card4Num];
+    }
+    if ([p1result isEqualToString: @"S"]) return 1;
+    if ([p2result isEqualToString: @"S"]) return 0;
+
+    //3 of a kind
+    if (([p1result isEqualToString: @"3K"]) && ([p2result isEqualToString: @"3K"]))
+    {
+        NSInteger result = [self compare:p1card4Num s2:p2card4Num];
+        if (result == -1)
+        {
+            return [self compare:p1card3Num s2:p2card3Num];
+        }
+        return result;
+    }
+
+    if (([p1result isEqualToString: @"3K"] || [p1result isEqualToString: @"3K"])) return 1;
+    if (([p2result isEqualToString: @"3K"] || [p2result isEqualToString: @"3K"])) return 0;
+
+    if (([p1result isEqualToString: @"2P"]) && ([p2result isEqualToString: @"2P"]) )
+    {
+        NSInteger result = [self compare:p1card2Num s2:p2card2Num];
+        if (result == -1)
+        {
+            result = [self compare:p1card0Num s2:p2card0Num];
+            if (result == -1) return [self compare:p1card4Num s2:p2card4Num];
+        }
+        return result;
+    }
+    if ([p1result isEqualToString: @"2P"]) return 1;
+    if ([p2result isEqualToString: @"2P"]) return 0;
+
+    if (([p1result isEqualToString: @"P"]) && ([p2result isEqualToString: @"P"]))
+    {
+        NSInteger result = [self compare:p1card0Num s2:p2card0Num];
+        if (result == -1){
+            result = [self compare:p1card4Num s2:p2card4Num];
+            if (result != -1) return result;
+            result = [self compare:p1card3Num s2:p2card3Num];
+            if (result != -1) return result;
+            result = [self compare:p1card2Num s2:p2card2Num];
+            if (result != -1) return result;
+            result = [self compare:p1card1Num s2:p2card1Num];
+            if (result != -1) return result;
+        }
+        return result;
+    }
+
+    if ([p1result isEqualToString: @"P"]) return 1;
+    if ([p2result isEqualToString: @"P"]) return 0;    
+
+    //high card
+    NSInteger result = [self compare:p1card4Num s2:p2card4Num];
+    if (result != -1) return result;
+    result = [self compare:p1card3Num s2:p2card3Num];
+    if (result != -1) return result;
+    result = [self compare:p1card2Num s2:p2card2Num];
+    if (result != -1) return result;
+    result = [self compare:p1card1Num s2:p2card1Num];
+    if (result != -1) return result;
+    result = [self compare:p1card0Num s2:p2card0Num];
+    if (result != -1) return result;
+
+    return -1;
+}
 
 - (void) sortAgain: (NSMutableArray*) arr
 {
