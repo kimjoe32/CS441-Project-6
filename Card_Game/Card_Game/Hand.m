@@ -30,6 +30,7 @@ NSMutableDictionary * values;
     [values setObject:[NSNumber numberWithInt:12] forKey:@"K"];
     [values setObject:[NSNumber numberWithInt:13] forKey:@"A"];
 }
+
 -(Hand*) init
 {
     self = [super init];
@@ -38,24 +39,19 @@ NSMutableDictionary * values;
     return self;
 }
 
-- (Hand*) init: (NSString*) card1
+- (void) addCards: (NSString*) card1
          card2:(NSString*) card2
          card3:(NSString*) card3
          card4:(NSString*) card4
          card5:(NSString*) card5
 {
-    self = [super init];
     cardsInHand = [NSMutableArray arrayWithObjects:card1,card2,card3,card4,card5,nil];
+    
     //sort strings based on card#
-    [cardsInHand sortedArrayUsingComparator:^NSComparisonResult(id obj1, id obj2) {
-        NSString *object1 = (NSString*)obj1;
-        NSString *object2 = (NSString*)obj2;
-        return [object1 compare:object2];
-    }];
-    [self sortAgain:cardsInHand];
-    [self initValues];
-    return self;
+    [cardsInHand sortUsingSelector:@selector(localizedCaseInsensitiveCompare:)];
+    [self sortAgain];
 }
+
 - (BOOL) checkSequentialCards
 {
     NSString * dictKey0 = [[cardsInHand objectAtIndex:0] substringToIndex:1];
@@ -86,10 +82,10 @@ NSMutableDictionary * values;
 - (NSString*) checkHand
 {
     NSString* card0Num = [[cardsInHand objectAtIndex:0] substringToIndex:1];
-    NSString* card1Num = [[cardsInHand objectAtIndex:0] substringToIndex:1];
-    NSString* card2Num = [[cardsInHand objectAtIndex:0] substringToIndex:1];
-    NSString* card3Num = [[cardsInHand objectAtIndex:0] substringToIndex:1];
-    NSString* card4Num = [[cardsInHand objectAtIndex:0] substringToIndex:1];
+    NSString* card1Num = [[cardsInHand objectAtIndex:1] substringToIndex:1];
+    NSString* card2Num = [[cardsInHand objectAtIndex:2] substringToIndex:1];
+    NSString* card3Num = [[cardsInHand objectAtIndex:3] substringToIndex:1];
+    NSString* card4Num = [[cardsInHand objectAtIndex:4] substringToIndex:1];
     //royal flush
     if ([self checkSequentialCards] && [self checkSameSuit] &&
         [[[cardsInHand objectAtIndex:0] substringToIndex:1] isEqualToString:@"T"]) return @"RF";
@@ -190,7 +186,6 @@ NSMutableDictionary * values;
     
     //high card
     return @"HC";
-    
 }
 
 - (NSInteger) compare: (NSString*) s1
@@ -198,24 +193,28 @@ NSMutableDictionary * values;
 {
     if ([values objectForKey:s1]  == [values objectForKey:s2])
         return -1;
-    return ([values objectForKey:s1] > [values objectForKey:s2]) ? 1 : 0;
+    return ([values objectForKey:s1] < [values objectForKey:s2]);
 }
--(NSInteger) checkWinner: (Hand*) p1 p2:(Hand*) p2
-{
-    NSString* p1result = [p1 checkHand];
-    NSString* p2result = [p2 checkHand];
 
-    NSString* p1card0Num = [[p1.cardsInHand objectAtIndex:0] substringToIndex:1];
-    NSString* p1card1Num = [[p1.cardsInHand objectAtIndex:0] substringToIndex:1];
-    NSString* p1card2Num = [[p1.cardsInHand objectAtIndex:0] substringToIndex:1];
-    NSString* p1card3Num = [[p1.cardsInHand objectAtIndex:0] substringToIndex:1];
-    NSString* p1card4Num = [[p1.cardsInHand objectAtIndex:0] substringToIndex:1];
+-(NSInteger) checkWinnerAgainst: (Hand*) p2
+{
+    NSString* p1result = [self checkHand];  NSLog(@"%@", p1result);
+    NSString* p2result = [p2 checkHand];    NSLog(@"%@", p2result);
+
+//    NSLog(@"%@ %@ %@ %@ %@", [cardsInHand objectAtIndex:0], [cardsInHand objectAtIndex:1], [cardsInHand objectAtIndex:2], [cardsInHand objectAtIndex:3], [cardsInHand objectAtIndex:4] );
+//    NSLog(@"%@ %@ %@ %@ %@", [p2.cardsInHand objectAtIndex:0], [p2.cardsInHand objectAtIndex:1], [p2.cardsInHand objectAtIndex:2], [p2.cardsInHand objectAtIndex:3], [p2.cardsInHand objectAtIndex:4] );
+    
+    NSString* p1card0Num = [[cardsInHand objectAtIndex:0] substringToIndex:1];
+    NSString* p1card1Num = [[cardsInHand objectAtIndex:1] substringToIndex:1];
+    NSString* p1card2Num = [[cardsInHand objectAtIndex:2] substringToIndex:1];
+    NSString* p1card3Num = [[cardsInHand objectAtIndex:3] substringToIndex:1];
+    NSString* p1card4Num = [[cardsInHand objectAtIndex:4] substringToIndex:1];
 
     NSString* p2card0Num = [[p2.cardsInHand objectAtIndex:0] substringToIndex:1];
-    NSString* p2card1Num = [[p2.cardsInHand objectAtIndex:0] substringToIndex:1];
-    NSString* p2card2Num = [[p2.cardsInHand objectAtIndex:0] substringToIndex:1];
-    NSString* p2card3Num = [[p2.cardsInHand objectAtIndex:0] substringToIndex:1];
-    NSString* p2card4Num = [[p2.cardsInHand objectAtIndex:0] substringToIndex:1];
+    NSString* p2card1Num = [[p2.cardsInHand objectAtIndex:1] substringToIndex:1];
+    NSString* p2card2Num = [[p2.cardsInHand objectAtIndex:2] substringToIndex:1];
+    NSString* p2card3Num = [[p2.cardsInHand objectAtIndex:3] substringToIndex:1];
+    NSString* p2card4Num = [[p2.cardsInHand objectAtIndex:4] substringToIndex:1];
     // 0 = p wins
     // 1 = p2 wins
 
@@ -265,12 +264,16 @@ NSMutableDictionary * values;
     {
         NSInteger result = [self compare:p1card4Num s2:p2card4Num];
         if (result != -1) return result;
+        
         result = [self compare:p1card3Num s2:p2card3Num];
         if (result != -1) return result;
+        
         result = [self compare:p1card2Num s2:p2card2Num];
         if (result != -1) return result;
+        
         result = [self compare:p1card1Num s2:p2card1Num];
         if (result != -1) return result;
+        
         result = [self compare:p1card0Num s2:p2card0Num];
         if (result != -1) return result;
     }
@@ -318,10 +321,13 @@ NSMutableDictionary * values;
         if (result == -1){
             result = [self compare:p1card4Num s2:p2card4Num];
             if (result != -1) return result;
+            
             result = [self compare:p1card3Num s2:p2card3Num];
             if (result != -1) return result;
+            
             result = [self compare:p1card2Num s2:p2card2Num];
             if (result != -1) return result;
+            
             result = [self compare:p1card1Num s2:p2card1Num];
             if (result != -1) return result;
         }
@@ -334,19 +340,23 @@ NSMutableDictionary * values;
     //high card
     NSInteger result = [self compare:p1card4Num s2:p2card4Num];
     if (result != -1) return result;
+    
     result = [self compare:p1card3Num s2:p2card3Num];
     if (result != -1) return result;
+    
     result = [self compare:p1card2Num s2:p2card2Num];
     if (result != -1) return result;
+    
     result = [self compare:p1card1Num s2:p2card1Num];
     if (result != -1) return result;
+    
     result = [self compare:p1card0Num s2:p2card0Num];
     if (result != -1) return result;
 
     return -1;
 }
 
-- (void) sortAgain: (NSMutableArray*) arr
+- (void) sortAgain
 {
     for(int i = 0; i < 4; i++)
     {
@@ -354,7 +364,9 @@ NSMutableDictionary * values;
         {
             for (int j = i; j< 4; j++)
             {
-                if (arr[j][0] == arr[j+1][0] && j+2 < 5)
+                if ([[[cardsInHand objectAtIndex:j] substringToIndex:1] isEqualToString:
+                    [[cardsInHand objectAtIndex:j+1] substringToIndex:1]] && j+2 < 5)
+                    //arr[j][0] == arr[j+1][0] && j+2 < 5)
                 {
                     [cardsInHand exchangeObjectAtIndex:j withObjectAtIndex:j+2];
                 }
@@ -363,13 +375,15 @@ NSMutableDictionary * values;
             }
         }
     }
+    
     for(int i = 0; i < 4; i++)
     {
         if ([[cardsInHand objectAtIndex:i] hasPrefix:@"J"])
         {
             for (int j = i; j< 4; j++)
             {
-                if (arr[j][0] == arr[j+1][0] && j+2 < 5)
+                if ([[[cardsInHand objectAtIndex:j] substringToIndex:1] isEqualToString:
+                     [[cardsInHand objectAtIndex:j+1] substringToIndex:1]] && j+2 < 5)
                 {
                     [cardsInHand exchangeObjectAtIndex:j withObjectAtIndex:j+2];
                 }
@@ -378,13 +392,15 @@ NSMutableDictionary * values;
             }
         }
     }
+    
     for(int i = 0; i < 4; i++)
     {
         if ([[cardsInHand objectAtIndex:i] hasPrefix:@"Q"])
         {
             for (int j = i; j< 4; j++)
             {
-                if (arr[j][0] == arr[j+1][0] && j+2 < 5)
+                if ([[[cardsInHand objectAtIndex:j] substringToIndex:1] isEqualToString:
+                     [[cardsInHand objectAtIndex:j+1] substringToIndex:1]] && j+2 < 5)
                 {
                     [cardsInHand exchangeObjectAtIndex:j withObjectAtIndex:j+2];
                 }
@@ -393,13 +409,15 @@ NSMutableDictionary * values;
             }
         }
     }
+    
     for(int i = 0; i < 4; i++)
     {
         if ([[cardsInHand objectAtIndex:i] hasPrefix:@"K"])
         {
             for (int j = i; j< 4; j++)
             {
-                if (arr[j][0] == arr[j+1][0] && j+2 < 5)
+                if ([[[cardsInHand objectAtIndex:j] substringToIndex:1] isEqualToString:
+                     [[cardsInHand objectAtIndex:j+1] substringToIndex:1]] && j+2 < 5)
                 {
                     [cardsInHand exchangeObjectAtIndex:j withObjectAtIndex:j+2];
                 }
@@ -408,13 +426,15 @@ NSMutableDictionary * values;
             }
         }
     }
+    
     for(int i = 0; i < 4; i++)
     {
         if ([[cardsInHand objectAtIndex:i] hasPrefix:@"A"])
         {
             for (int j = i; j< 4; j++)
             {
-                if (arr[j][0] == arr[j+1][0] && j+2 < 5)
+                if ([[[cardsInHand objectAtIndex:j] substringToIndex:1] isEqualToString:
+                     [[cardsInHand objectAtIndex:j+1] substringToIndex:1]] && j+2 < 5)
                 {
                     [cardsInHand exchangeObjectAtIndex:j withObjectAtIndex:j+2];
                 }
