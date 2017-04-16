@@ -521,6 +521,7 @@
 				C985381D1E95D4CC0046C358 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		C985381E1E95D4CC0046C358 /* Build configuration list for PBXNativeTarget "Card_GameTests" */ = {
 			isa = XCConfigurationList;
@@ -529,6 +530,7 @@
 				C98538201E95D4CC0046C358 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		C98538211E95D4CC0046C358 /* Build configuration list for PBXNativeTarget "Card_GameUITests" */ = {
 			isa = XCConfigurationList;
@@ -537,6 +539,7 @@
 				C98538231E95D4CC0046C358 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
