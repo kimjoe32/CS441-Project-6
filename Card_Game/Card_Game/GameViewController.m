@@ -28,8 +28,10 @@
     skView.showsFPS = YES;
     skView.showsNodeCount = YES;
     
-    Hand * h1 = [[Hand alloc] init:@"8C" card2:@"TS" card3:@"KC" card4:@"9H" card5:@"4S"];
-    Hand * h2 = [[Hand alloc] init:@"7D" card2:@"2S" card3:@"5D" card4:@"3S" card5:@"AC"];
+    Hand * h1 = [[Hand alloc] init];
+    [h1 addCards:@"8C" card2:@"TS" card3:@"KC" card4:@"9H" card5:@"4S"];
+    Hand * h2 = [[Hand alloc] init];
+    [h2 addCards:@"7D" card2:@"2S" card3:@"5D" card4:@"3S" card5:@"AC"];
     
     NSInteger winner = [h1 checkWinnerAgainst:h2];
     NSLog(@"%ld", (long)winner);
