@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		6CFD33561EA41878006CB802 /* Hand.m in Sources */ = {isa = PBXBuildFile; fileRef = 6CFD33551EA41878006CB802 /* Hand.m */; };
+		C9484B351EA42E9D001F9875 /* Deck.m in Sources */ = {isa = PBXBuildFile; fileRef = C9484B341EA42E9D001F9875 /* Deck.m */; };
 		C98537EC1E95D4CC0046C358 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = C98537EB1E95D4CC0046C358 /* main.m */; };
 		C98537EF1E95D4CC0046C358 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = C98537EE1E95D4CC0046C358 /* AppDelegate.m */; };
 		C98537F11E95D4CC0046C358 /* GameScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = C98537F01E95D4CC0046C358 /* GameScene.sks */; };
@@ -42,6 +43,8 @@
 /* Begin PBXFileReference section */
 		6CFD33541EA41878006CB802 /* Hand.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Hand.h; sourceTree = "<group>"; };
 		6CFD33551EA41878006CB802 /* Hand.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Hand.m; sourceTree = "<group>"; };
+		C9484B331EA42E9D001F9875 /* Deck.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Deck.h; sourceTree = "<group>"; };
+		C9484B341EA42E9D001F9875 /* Deck.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Deck.m; sourceTree = "<group>"; };
 		C98537E71E95D4CC0046C358 /* Card_Game.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Card_Game.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C98537EB1E95D4CC0046C358 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		C98537ED1E95D4CC0046C358 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -131,6 +134,8 @@
 				C98537EA1E95D4CC0046C358 /* Supporting Files */,
 				C9B000921EA424330009F424 /* Card.h */,
 				C9B000931EA424330009F424 /* Card.m */,
+				C9484B331EA42E9D001F9875 /* Deck.h */,
+				C9484B341EA42E9D001F9875 /* Deck.m */,
 			);
 			path = Card_Game;
 			sourceTree = "<group>";
@@ -297,6 +302,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				6CFD33561EA41878006CB802 /* Hand.m in Sources */,
+				C9484B351EA42E9D001F9875 /* Deck.m in Sources */,
 				C98537F91E95D4CC0046C358 /* GameViewController.m in Sources */,
 				C98537EF1E95D4CC0046C358 /* AppDelegate.m in Sources */,
 				C98537F61E95D4CC0046C358 /* GameScene.m in Sources */,

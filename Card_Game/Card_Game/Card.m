@@ -12,7 +12,12 @@
 
 -(Card *) init: (NSString *) cardName{
     [self setCardString:cardName];
-    [self setCardImg:[UIImage imageNamed:cardName]];
+    
+    //possible error here
+    NSMutableString *imageName = [NSMutableString stringWithString:cardName];
+    [imageName appendString:@".png"];
+    
+    [self setCardImg:[UIImage imageNamed:imageName]];
     return self;
 }
 
