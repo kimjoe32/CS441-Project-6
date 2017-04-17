@@ -115,21 +115,32 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <textField hidden="YES" opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" enabled="NO" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Bet Amount" textAlignment="natural" clearsOnBeginEditing="YES" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="4pu-gz-oKv" userLabel="betAmount">
+                                <rect key="frame" x="233" y="173" width="200" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <nil key="textColor"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                <textInputTraits key="textInputTraits" spellCheckingType="no" keyboardType="numberPad"/>
+                                <connections>
+                                    <outlet property="delegate" destination="BV1-FR-VrT" id="yaA-kG-fYm"/>
+                                </connections>
+                            </textField>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     </view>
                     <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
                     <size key="freeformSize" width="667" height="375"/>
                     <connections>
+                        <outlet property="betAmountInputField" destination="4pu-gz-oKv" id="Bzl-EU-vfs"/>
                         <outlet property="betButton" destination="U6r-4d-74U" id="5aL-eu-0S3"/>
                         <outlet property="checkButton" destination="zOa-t2-NSj" id="Tgl-ib-Wdc"/>
                         <outlet property="moneyLabel" destination="EuW-O1-kn3" id="0zD-xG-ew9"/>
                         <outlet property="potLabel" destination="FJR-Nd-mFg" id="Ytn-gI-XB1"/>
-                        <outletCollection property="cards" destination="SBp-Db-kPB" id="hN2-K1-715"/>
-                        <outletCollection property="cards" destination="B56-AP-BUb" id="h7Y-XL-X5e"/>
-                        <outletCollection property="cards" destination="JKL-P2-zdK" id="dGM-jh-90c"/>
-                        <outletCollection property="cards" destination="ZIr-1H-WXI" id="3iz-xS-9l5"/>
-                        <outletCollection property="cards" destination="XCy-XC-dUM" id="s7b-4c-xql"/>
+                        <outletCollection property="storyboardCards" destination="SBp-Db-kPB" id="J84-Fr-i5P"/>
+                        <outletCollection property="storyboardCards" destination="B56-AP-BUb" id="jN0-7m-ChD"/>
+                        <outletCollection property="storyboardCards" destination="JKL-P2-zdK" id="imN-zR-aSM"/>
+                        <outletCollection property="storyboardCards" destination="ZIr-1H-WXI" id="F7i-jb-6oz"/>
+                        <outletCollection property="storyboardCards" destination="XCy-XC-dUM" id="gmP-c8-azg"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="SZV-WD-TEh" sceneMemberID="firstResponder"/>

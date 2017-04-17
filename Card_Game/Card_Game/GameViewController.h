@@ -14,18 +14,31 @@
 #import "Card.h"
 #import "Player.h"
 
-@interface GameViewController : UIViewController
+@interface GameViewController : UIViewController <UITextFieldDelegate>
 @property (strong, nonatomic) IBOutlet UILabel *moneyLabel;
+- (float) getMoney;
+- (void) setMoney: (float) newValue;
+
 @property (strong, nonatomic) IBOutlet UILabel *potLabel;
+- (float) getPot;
+- (void) setPot: (float) newValue;
+
 @property (strong, nonatomic) IBOutlet UIButton *checkButton;
+-(IBAction)checkAction:(id)sender;
+
 @property (strong, nonatomic) IBOutlet UIButton *betButton;
+-(IBAction)betAction:(id)sender;
+
+@property (strong, nonatomic) IBOutlet UITextField *betAmountInputField;
+- (BOOL)textFieldShouldReturn:(UITextField *)textField;
+
 @property (nonatomic) float lastBet;
-@property (nonatomic, retain) IBOutletCollection(UIImageView) NSArray* cards;
+@property (nonatomic, retain) IBOutletCollection(UIImageView) NSArray* storyboardCards;
 @property (strong, nonatomic) Player * player1;
 @property (strong, nonatomic) Player * player2;
 @property (nonatomic) NSInteger playerTurn;
--(IBAction)betAction:(id)sender;
--(IBAction)checkAction:(id)sender;
+
+-(void) decideWinner;
+-(void) switchPlayer;
 
 @end
-``

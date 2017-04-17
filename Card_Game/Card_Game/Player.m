@@ -34,10 +34,11 @@
     [hand clearHand];
 }
 
-- (BOOL) compareHandAgainst: (Player*) player2
+- (NSInteger) compareHandAgainst: (Player*) player2
 {
     return [hand checkWinnerAgainst:player2.hand];
 }
+
 - (void) setStoryboardCardsToThisPlayerCards:(NSArray*) storyboardCards
 {
     for (int i =0; i < 4; i++)

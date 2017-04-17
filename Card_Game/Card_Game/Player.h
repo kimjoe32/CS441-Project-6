@@ -22,6 +22,6 @@
 - (void) addMoney: (float) m;
 - (void) subtractMoney: (float) m;
 - (void) clearHand;
-- (BOOL) compareHandAgainst: (Player*) player2;
+- (NSInteger) compareHandAgainst: (Player*) player2;
 - (void) setStoryboardCardsToThisPlayerCards:(NSArray*) storyboardCards;
 @end
