@@ -16,6 +16,7 @@
 @synthesize player2;
 @synthesize storyboardCards;
 @synthesize deck;
+@synthesize checkBool;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -34,6 +35,8 @@
     [skView presentScene:scene];
     deck = [[Deck alloc] init];
 
+    checkBool = false;
+    
     //create players and give them cards
     player1 = [[Player alloc] init];
     player2 = [[Player alloc] init];
@@ -77,26 +80,25 @@
     [_checkButton setEnabled:FALSE];
     [_betAmountInputField setHidden:FALSE];
     [_betAmountInputField setEnabled:TRUE];
+    
+    if(checkBool == true){
+        checkBool = false;
+    }
 }
 
 - (IBAction)checkAction:(id)sender
 {
     //MATT: need logic if both players check at the beginning
-    if (playerTurn == 1)
-    {
-        [player1 subtractMoney:_lastBet label: _moneyLabel];
-    }
-    else
-    {
-        [player2 subtractMoney:_lastBet label: _moneyLabel];
-    }
     
-    [self setPot:[self getPot] + _lastBet];
-    
-    if (_lastBet > 0) //if checked after other player bets, decide winner
-    {
+    if(checkBool == false && playerTurn == 1){ //player 1 checks first
+        checkBool = true;
+    }
+    else if(checkBool == true && playerTurn == 2){ //player 2 checks after player 1 checks
+        //resolve game
         [self decideWinner];
+        checkBool = false;
     }
+    
     [self switchPlayer];
 }
 
@@ -201,47 +203,6 @@
 {
     [_potLabel setText:[NSString stringWithFormat:@"$%ld", (long)newValue]];
 }
-
-
-- (BOOL)textFieldShouldReturn:(UITextField *)textField
-{
-    NSInteger bet = [[textField text] integerValue];
-    //check for invalid input
-    if (bet > [self getMoney] ||//bet is greater than available money
-        bet <= _lastBet           //bet is <= last bet from other player
-        //TODO: make sure there's no other forms of invalid input
-        )
-    {
-        return NO;
-    }
-    else //valid input given
-    {
-        [self setPot:bet + [self getPot]];//increase pot size
-        
-        //subtract bet from players money
-        if (playerTurn == 1)
-        {
-            [player1 subtractMoney:bet label: _moneyLabel];
-        }
-        else
-        {
-            [player2 subtractMoney:bet label: _moneyLabel];
-        }
-        textField.text = @"";//clear text
-        [textField setEnabled:FALSE];//hide textfield
-        [textField setHidden:TRUE];
-        
-        //enable bet and check buttons
-        [_betButton setEnabled:TRUE];
-        [_checkButton setEnabled:TRUE];
-        
-        _lastBet = bet;
-        [self switchPlayer];
-        return YES;
-    }
-}
-
-
 
 - (BOOL)shouldAutorotate {
     return YES;
