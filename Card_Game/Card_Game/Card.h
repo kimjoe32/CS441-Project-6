@@ -11,7 +11,7 @@
 
 @interface Card : NSObject
 
-- (Card *) init: (NSString *) cardName;
+- (Card *) init;
 
 @property (nonatomic, strong) IBOutlet UIImage *cardImg;
 @property (nonatomic, strong) NSString *cardString;

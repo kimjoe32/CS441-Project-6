@@ -8,10 +8,13 @@
 
 #import "GameViewController.h"
 #import "GameScene.h"
+NSInteger playerTurn;//player 1 or 2
 
 @implementation GameViewController
+@synthesize lastBet;
 
 - (void)viewDidLoad {
+    playerTurn = 1;
     [super viewDidLoad];
 
     // Load the SKScene from 'GameScene.sks'
@@ -42,6 +45,55 @@
     skView.showsFPS = YES;
     skView.showsNodeCount = YES;
     
+}
+
+-(IBAction)betAction:(id)sender
+{
+    
+    playerTurn = (playerTurn == 1)? 2 : 1;
+}
+
+-(IBAction)checkAction:(id)sender
+{
+    
+    playerTurn = (playerTurn == 1)? 2 : 1;
+}
+
+-(void) switchPlayer
+{
+    playerTurn = (playerTurn == 1)? 2 : 1;
+    //TODO: change cards
+    //TODO: change pot and change 
+}
+
+- (float) getMoney
+{
+    //get the value stored at the moneyLabel
+    NSNumberFormatter *nf = [[NSNumberFormatter alloc] init];
+    [nf setNumberStyle:NSNumberFormatterCurrencyStyle];
+    NSNumber *number = [nf numberFromString:[_moneyLabel text]];
+    float f = [number floatValue];
+    return f;
+}
+
+- (float) getPot
+{
+    //get the value stored at the potLabel
+    NSNumberFormatter *nf = [[NSNumberFormatter alloc] init];
+    [nf setNumberStyle:NSNumberFormatterCurrencyStyle];
+    NSNumber *number = [nf numberFromString:[_potLabel text]];
+    float f = [number floatValue];
+    return f;
+}
+
+- (void) setMoney: (float) newValue
+{
+    [_moneyLabel setText:[NSString stringWithFormat:@"$%.02f", newValue]];
+}
+
+- (void) setPot: (float) newValue
+{
+    [_potLabel setText:[NSString stringWithFormat:@"$%.02f", newValue]];
 }
 
 - (BOOL)shouldAutorotate {

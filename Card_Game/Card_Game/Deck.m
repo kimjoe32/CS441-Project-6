@@ -13,11 +13,13 @@
 
 -(Deck *) init{
     
+    self.cardArr = [[NSMutableArray alloc] init];
+    
     int currentCard;
-    NSString *currentCardStr;
     for(int i = 0; i < 4; ++i){
         
         for(int j = 0; j < 13; j++){
+            NSString *currentCardStr;
             currentCard = j+2;
             
             //clubs
@@ -41,7 +43,9 @@
                 else{ //number cards
                     currentCardStr = [NSString stringWithFormat:@"%iC", currentCard];
                 }
-                Card *newCard = [[Card alloc] init:currentCardStr];
+                Card *newCard = [[Card alloc] init];
+                [newCard setCardString:currentCardStr];
+                [newCard setCardImg:[UIImage imageNamed:currentCardStr]];
                 [self addCardToDeck:newCard];
             }
             else if(i == 1){ //spades
@@ -64,7 +68,9 @@
                 else{ //number cards
                     currentCardStr = [NSString stringWithFormat:@"%iS", currentCard];
                 }
-                Card *newCard = [[Card alloc] init:currentCardStr];
+                Card *newCard = [[Card alloc] init];
+                [newCard setCardString:currentCardStr];
+                [newCard setCardImg:[UIImage imageNamed:currentCardStr]];
                 [self addCardToDeck:newCard];
             }
             else if(i == 2){ //hearts
@@ -87,7 +93,9 @@
                 else{ //number cards
                     currentCardStr = [NSString stringWithFormat:@"%iH", currentCard];
                 }
-                Card *newCard = [[Card alloc] init:currentCardStr];
+                Card *newCard = [[Card alloc] init];
+                [newCard setCardString:currentCardStr];
+                [newCard setCardImg:[UIImage imageNamed:currentCardStr]];
                 [self addCardToDeck:newCard];
             }
             else{ //diamonds
@@ -110,12 +118,14 @@
                 else{ //number cards
                     currentCardStr = [NSString stringWithFormat:@"%iD", currentCard];
                 }
-                Card *newCard = [[Card alloc] init:currentCardStr];
+                Card *newCard = [[Card alloc] init];
+                [newCard setCardString:currentCardStr];
+                [newCard setCardImg:[UIImage imageNamed:currentCardStr]];
                 [self addCardToDeck:newCard];
             }
         }
     }
-    
+    //NSLog(@"%lu\n", (unsigned long)[[self cardArr] count]);
     return self;
 }
 
@@ -133,10 +143,12 @@
     int ind2 = 0;
     NSInteger upperBound = ([[self cardArr] count])-1;
     for(int i = 0; i < 100; ++i){
-        
+        ind1 = 0;
+        ind2 = 0;
         while(ind1 == ind2){
             ind1 = arc4random_uniform((u_int32_t)upperBound);
             ind2 = arc4random_uniform((u_int32_t)upperBound);
+            //printf("%d, %d\n", ind1, ind2);
         }
         
         [[self cardArr] exchangeObjectAtIndex:ind1 withObjectAtIndex:ind2];

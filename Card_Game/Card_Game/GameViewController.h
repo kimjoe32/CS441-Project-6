@@ -10,6 +10,8 @@
 #import <SpriteKit/SpriteKit.h>
 #import <GameplayKit/GameplayKit.h>
 #import "Hand.h"
+#import "Deck.h"
+#import "Card.h"
 
 @interface GameViewController : UIViewController
 @property (strong, nonatomic) IBOutlet UILabel *moneyLabel;

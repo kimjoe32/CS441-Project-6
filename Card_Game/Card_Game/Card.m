@@ -10,15 +10,10 @@
 
 @implementation Card
 
--(Card *) init: (NSString *) cardName{
-    [self setCardString:cardName];
-    
-    //possible error here
-    NSMutableString *imageName = [NSMutableString stringWithString:cardName];
-    [imageName appendString:@".png"];
-    
-    [self setCardImg:[UIImage imageNamed:imageName]];
+-(Card *) init{
+    self = [super init];
     return self;
 }
+
 
 @end
