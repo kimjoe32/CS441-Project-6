@@ -22,7 +22,6 @@
     [super viewDidLoad];
     
     [self.betAmountInputField setDelegate:self];
-    
     // Load the SKScene from 'GameScene.sks'
     GameScene *scene = (GameScene *)[SKScene nodeWithFileNamed:@"GameScene"];
     
@@ -34,25 +33,13 @@
     // Present the scene
     [skView presentScene:scene];
     deck = [[Deck alloc] init];
+    checkBool = false;
     
-    checkBool = false;
-
-    checkBool = false;
     
     //create players and give them cards
     player1 = [[Player alloc] init];
     player2 = [[Player alloc] init];
     [self populateHands];
-    for(Card* c in player1.hand.cardObjsInHand)
-    {
-        NSLog(@"%@", c.cardString);
-    }
-    NSLog(@"*************");
-    for(Card* c in player2.hand.cardObjsInHand)
-    {
-        NSLog(@"%@", c.cardString);
-    }
-    
     //player 1 goes first, but switchPlayer will set it to player and show player1's cards
     playerTurn = 2;
     [self switchPlayer];
@@ -69,7 +56,6 @@
         NSLog(@"%@\n", cardName);
     }
     */
-    
     skView.showsFPS = YES;
     skView.showsNodeCount = YES;
 }
@@ -85,8 +71,8 @@
     if(checkBool == true){
         checkBool = false;
     }
-    [_confirmBet setEnabled:FALSE]; //*****
-    [_confirmBet setHidden:TRUE]; //*****
+    [_confirmBet setEnabled:TRUE]; //*****
+    [_confirmBet setHidden:FALSE]; //*****
 }
 
 - (IBAction)checkAction:(id)sender
@@ -109,17 +95,19 @@
 {
     //also handles raises
     NSInteger bet = [[_betAmountInputField text] integerValue];
+    
     //check for invalid input
     if (bet > [self getMoney] ||//bet is greater than available money
         bet <= _lastBet           //raise is <= last bet from other player
         //TODO: make sure there's no other forms of invalid input
         )
     {
-        NSLog(@"Bad Input : %ld", (long)bet);
+        NSLog(@"Bad Input : %ld, available money = %ld", (long)bet, (long) [self getMoney]);
     }
     else //valid input given
     {
         NSLog(@"Good Input : %ld", (long)bet);
+        
         [self setPot:bet + [self getPot]];//increase pot size
         
         //subtract bet from players money
@@ -200,6 +188,13 @@
     [player1 clearHand];
     [player2 clearHand];
     
+    [deck clearDeck];
+    [deck remakeDeck];
+    [deck shuffleDeck];
+    
+    //Needs testing
+    [self populateHands];
+    
     //player1 starts
     playerTurn = 1;
     [player1 setStoryboardCardsToThisPlayerCards:storyboardCards];
@@ -208,12 +203,7 @@
     
     //MATT: add new cards to their hands
     
-    [deck clearDeck];
-    [deck remakeDeck];
-    [deck shuffleDeck];
     
-    //Needs testing
-    [self populateHands];
 }
 
 - (void) populateHands
@@ -256,18 +246,18 @@
 - (NSInteger) getPot
 {
     //get the value stored at the potLabel
-    NSInteger number = [[_moneyLabel text] integerValue];
+    NSInteger number = [[_potLabel text] integerValue];
     return number;
 }
 
 - (void) setMoney: (NSInteger) newValue
 {
-    [_moneyLabel setText:[NSString stringWithFormat:@"$%ld", (long)newValue]];
+    [_moneyLabel setText:[NSString stringWithFormat:@"%ld", (long)newValue]];
 }
 
 - (void) setPot: (NSInteger) newValue
-{
-    [_potLabel setText:[NSString stringWithFormat:@"$%ld", (long)newValue]];
+{   
+    [_potLabel setText:[NSString stringWithFormat:@"%ld", (long)newValue]];
 }
 
 - (BOOL)shouldAutorotate {
