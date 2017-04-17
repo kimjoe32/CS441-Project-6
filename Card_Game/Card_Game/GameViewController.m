@@ -85,6 +85,8 @@
     if(checkBool == true){
         checkBool = false;
     }
+    [_confirmBet setEnabled:FALSE]; //*****
+    [_confirmBet setHidden:TRUE]; //*****
 }
 
 - (IBAction)checkAction:(id)sender
@@ -101,6 +103,48 @@
     }
     
     [self switchPlayer];
+}
+
+- (IBAction)confirmBetAction:(id)sender
+{
+    //also handles raises
+    NSInteger bet = [[_betAmountInputField text] integerValue];
+    //check for invalid input
+    if (bet > [self getMoney] ||//bet is greater than available money
+        bet <= _lastBet           //raise is <= last bet from other player
+        //TODO: make sure there's no other forms of invalid input
+        )
+    {
+        NSLog(@"Bad Input : %ld", (long)bet);
+    }
+    else //valid input given
+    {
+        NSLog(@"Good Input : %ld", (long)bet);
+        [self setPot:bet + [self getPot]];//increase pot size
+        
+        //subtract bet from players money
+        if (playerTurn == 1)
+        {
+            [player1 subtractMoney:bet label: _moneyLabel];
+        }
+        else
+        {
+            [player2 subtractMoney:bet label: _moneyLabel];
+        }
+        _betAmountInputField.text = @"";//clear text
+        [_betAmountInputField setEnabled:FALSE];//hide textfield
+        [_betAmountInputField setHidden:TRUE];
+        
+        [_confirmBet setEnabled:FALSE];
+        [_confirmBet setHidden:TRUE];
+        
+        //enable bet and check buttons
+        [_betButton setEnabled:TRUE];
+        [_checkButton setEnabled:TRUE];
+        
+        _lastBet = bet;
+        [self switchPlayer];
+    }
 }
 
 
