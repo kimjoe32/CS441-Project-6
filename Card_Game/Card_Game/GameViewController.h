@@ -24,6 +24,7 @@
 @property (strong, nonatomic) IBOutlet UIImageView *card3;
 @property (strong, nonatomic) IBOutlet UIImageView *card4;
 @property (strong, nonatomic) IBOutlet UIImageView *card5;
+@property (strong, nonatomic) NSInteger playerTurn;
 -(IBAction)betAction:(id)sender;
 -(IBAction)checkAction:(id)sender;
 @end
