@@ -37,6 +37,7 @@
 @property (strong, nonatomic) Player * player1;
 @property (strong, nonatomic) Player * player2;
 @property (nonatomic) NSInteger playerTurn;
+@property (nonatomic, strong) Deck *deck;
 
 -(void) decideWinner;
 -(void) switchPlayer;

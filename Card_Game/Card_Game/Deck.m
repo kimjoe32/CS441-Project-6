@@ -12,6 +12,7 @@
 @implementation Deck
 
 -(Deck *) init{
+    //need super init here??
     
     self.cardArr = [[NSMutableArray alloc] init];
     
@@ -24,8 +25,13 @@
     [[self cardArr] addObject:card];
 }
 
-- (void) removeCardFromDeck: (int) index{
+- (Card *) removeCardFromDeck: (int) index{
+    
+    Card *ret = [[self cardArr] objectAtIndex:index];
+    
     [[self cardArr] removeObjectAtIndex:index];
+    
+    return ret;
 }
 
 - (void) clearDeck{

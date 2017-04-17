@@ -10,11 +10,15 @@
 #import "GameScene.h"
 
 @implementation GameViewController
+
 @synthesize playerTurn;
 @synthesize player1;
 @synthesize player2;
 @synthesize storyboardCards;
+@synthesize deck;
+
 - (void)viewDidLoad {
+    
     [super viewDidLoad];
     playerTurn = 1;
     // Load the SKScene from 'GameScene.sks'
@@ -27,7 +31,7 @@
     
     // Present the scene
     [skView presentScene:scene];
-    //Deck *deck = [[Deck alloc] init];
+    deck = [[Deck alloc] init];
     
     /*
     NSLog(@"count: %lu\n", (unsigned long)[[deck cardArr] count]);
@@ -117,7 +121,36 @@
     [player1 setStoryboardCardsToThisPlayerCards:storyboardCards];
     [_moneyLabel setText:[NSString stringWithFormat:@"%.02f", [player1 money]]];
     _lastBet = 0;
+    
     //MATT: add new cards to their hands
+    
+    [deck clearDeck];
+    [deck remakeDeck];
+    [deck shuffleDeck];
+    
+    //Needs testing
+    NSMutableArray *player1Hand = [[NSMutableArray alloc] init];
+    NSMutableArray *player2Hand = [[NSMutableArray alloc] init];
+    
+    for(int i = 0; i < 10; ++i){
+        NSInteger upperBound = [[deck cardArr] count]-1;
+        int ind = arc4random_uniform((u_int32_t)upperBound);
+        
+        if((i % 2) == 0){ //player 1
+            [player1Hand addObject:[deck removeCardFromDeck:ind]];
+        }
+        else{
+            [player2Hand addObject:[deck removeCardFromDeck:ind]];
+        }
+    }
+    
+    [[player1 hand] addCards:[[player1Hand objectAtIndex:0] cardString] card2:[[player1Hand objectAtIndex:1] cardString] card3:[[player1Hand objectAtIndex:2] cardString] card4:[[player1Hand objectAtIndex:3] cardString] card5:[[player1Hand objectAtIndex:4] cardString]];
+    
+    [[player1 hand] addCardObjects:[player1Hand objectAtIndex:0] card2:[player1Hand objectAtIndex:1] card3:[player1Hand objectAtIndex:2] card4:[player1Hand objectAtIndex:3] card5:[player1Hand objectAtIndex:4]];
+    
+    [[player2 hand] addCards:[[player2Hand objectAtIndex:0] cardString] card2:[[player2Hand objectAtIndex:1] cardString] card3:[[player2Hand objectAtIndex:2] cardString] card4:[[player2Hand objectAtIndex:3] cardString] card5:[[player2Hand objectAtIndex:4] cardString]];
+    
+    [[player2 hand] addCardObjects:[player2Hand objectAtIndex:0] card2:[player2Hand objectAtIndex:1] card3:[player2Hand objectAtIndex:2] card4:[player2Hand objectAtIndex:3] card5:[player2Hand objectAtIndex:4]];
 }
 
 - (float) getMoney
