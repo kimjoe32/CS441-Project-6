@@ -183,21 +183,15 @@
 - (NSInteger) getMoney
 {
     //get the value stored at the moneyLabel
-    NSNumberFormatter *nf = [[NSNumberFormatter alloc] init];
-    [nf setNumberStyle:NSNumberFormatterCurrencyStyle];
-    NSNumber *number = [nf numberFromString:[_moneyLabel text]];
-    NSInteger f = [number integerValue];
-    return f;
+    NSInteger number = [[_moneyLabel text] integerValue];
+    return number;
 }
 
 - (NSInteger) getPot
 {
     //get the value stored at the potLabel
-    NSNumberFormatter *nf = [[NSNumberFormatter alloc] init];
-    [nf setNumberStyle:NSNumberFormatterCurrencyStyle];
-    NSNumber *number = [nf numberFromString:[_potLabel text]];
-    NSInteger f = [number integerValue];
-    return f;
+    NSInteger number = [[_moneyLabel text] integerValue];
+    return number;
 }
 
 - (void) setMoney: (NSInteger) newValue
@@ -214,7 +208,8 @@
 - (BOOL)textFieldShouldReturn:(UITextField *)textField
 {
     NSInteger bet = [[textField text] integerValue];
-    NSLog(@"starting");
+    NSLog(@"starting with bet: %ld", (long)bet);
+    NSLog(@"money = %ld", [self getMoney]);
     //check for invalid input
     if (bet > [self getMoney] ||//bet is greater than available money
         bet <= _lastBet           //bet is <= last bet from other player

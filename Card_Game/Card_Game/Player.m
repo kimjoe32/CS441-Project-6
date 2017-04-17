@@ -50,7 +50,7 @@
 
 - (void) setStoryboardCardsToThisPlayerCards:(NSArray*) storyboardCards
 {
-    for (int i =0; i < 4; i++)
+    for (int i =0; i < 5; i++)
     {
         UIImageView* sbCard = (UIImageView*) [storyboardCards objectAtIndex:i];
         [sbCard setImage:[[hand.cardObjsInHand objectAtIndex:i] cardImg]];
