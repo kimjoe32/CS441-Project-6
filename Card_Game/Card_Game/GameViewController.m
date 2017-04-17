@@ -43,15 +43,6 @@
     player1 = [[Player alloc] init];
     player2 = [[Player alloc] init];
     [self populateHands];
-    for(Card* c in player1.hand.cardObjsInHand)
-    {
-        NSLog(@"%@", c.cardString);
-    }
-    NSLog(@"*************");
-    for(Card* c in player2.hand.cardObjsInHand)
-    {
-        NSLog(@"%@", c.cardString);
-    }
     
     //player 1 goes first, but switchPlayer will set it to player and show player1's cards
     playerTurn = 2;
@@ -95,14 +86,16 @@
     
     if(checkBool == false && playerTurn == 1){ //player 1 checks first
         checkBool = true;
+        [self switchPlayer];
+        printf("here1\n");
     }
     else if(checkBool == true && playerTurn == 2){ //player 2 checks after player 1 checks
         //resolve game
-        [self decideWinner];
         checkBool = false;
+        [self decideWinner];
+        printf("here2\n");
     }
-    
-    [self switchPlayer];
+
 }
 
 - (IBAction)confirmBetAction:(id)sender
@@ -200,12 +193,6 @@
     [player1 clearHand];
     [player2 clearHand];
     
-    //player1 starts
-    playerTurn = 1;
-    [player1 setStoryboardCardsToThisPlayerCards:storyboardCards];
-    [_moneyLabel setText:[NSString stringWithFormat:@"%ld", (long)[player1 money]]];
-    _lastBet = 0;
-    
     //MATT: add new cards to their hands
     
     [deck clearDeck];
@@ -214,6 +201,13 @@
     
     //Needs testing
     [self populateHands];
+    
+    //player1 starts
+    playerTurn = 1;
+    [player1 setStoryboardCardsToThisPlayerCards:storyboardCards];
+    [_moneyLabel setText:[NSString stringWithFormat:@"%ld", (long)[player1 money]]];
+    _lastBet = 0;
+    
 }
 
 - (void) populateHands
@@ -256,18 +250,18 @@
 - (NSInteger) getPot
 {
     //get the value stored at the potLabel
-    NSInteger number = [[_moneyLabel text] integerValue];
+    NSInteger number = [[_potLabel text] integerValue];
     return number;
 }
 
 - (void) setMoney: (NSInteger) newValue
 {
-    [_moneyLabel setText:[NSString stringWithFormat:@"$%ld", (long)newValue]];
+    [_moneyLabel setText:[NSString stringWithFormat:@"%ld", (long)newValue]];
 }
 
 - (void) setPot: (NSInteger) newValue
 {
-    [_potLabel setText:[NSString stringWithFormat:@"$%ld", (long)newValue]];
+    [_potLabel setText:[NSString stringWithFormat:@"%ld", (long)newValue]];
 }
 
 - (BOOL)shouldAutorotate {
