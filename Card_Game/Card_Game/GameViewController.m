@@ -11,6 +11,8 @@
 
 @implementation GameViewController
 @synthesize playerTurn;
+@synthesize player1;
+@synthesize player2;
 - (void)viewDidLoad {
     [super viewDidLoad];
     playerTurn = 1;
@@ -45,13 +47,12 @@
 }
 
 
--(IBAction)betAction:(id)sender
+- (IBAction)betAction:(id)sender
 {
-    
     playerTurn = (playerTurn == 1)? 2 : 1;
 }
 
--(IBAction)checkAction:(id)sender
+- (IBAction)checkAction:(id)sender
 {
     
     playerTurn = (playerTurn == 1)? 2 : 1;
@@ -61,7 +62,9 @@
 {
     playerTurn = (playerTurn == 1)? 2 : 1;
     //TODO: change cards
+    
     //TODO: change pot and change
+    
 }
 
 - (float) getMoney

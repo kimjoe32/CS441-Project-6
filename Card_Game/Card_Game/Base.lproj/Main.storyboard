@@ -59,13 +59,6 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Pot:$0" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FJR-Nd-mFg">
-                                <rect key="frame" x="258" y="0.0" width="150" height="45"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="U6r-4d-74U">
                                 <rect key="frame" x="28" y="318" width="100" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -93,7 +86,7 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="QD" translatesAutoresizingMaskIntoConstraints="NO" id="B56-AP-BUb" userLabel="Card2">
-                                <rect key="frame" x="148" y="93" width="120" height="160"/>
+                                <rect key="frame" x="147" y="93" width="120" height="160"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="QD" translatesAutoresizingMaskIntoConstraints="NO" id="JKL-P2-zdK" userLabel="Card3">
@@ -108,6 +101,20 @@
                                 <rect key="frame" x="532" y="93" width="120" height="160"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="$0" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FJR-Nd-mFg">
+                                <rect key="frame" x="311" y="0.0" width="132" height="45"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Pot:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EKN-mq-zdn">
+                                <rect key="frame" x="276" y="0.0" width="39" height="45"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     </view>
@@ -115,19 +122,19 @@
                     <size key="freeformSize" width="667" height="375"/>
                     <connections>
                         <outlet property="betButton" destination="U6r-4d-74U" id="5aL-eu-0S3"/>
-                        <outlet property="card1" destination="SBp-Db-kPB" id="V0I-bz-28h"/>
-                        <outlet property="card2" destination="B56-AP-BUb" id="nvH-nc-dVM"/>
-                        <outlet property="card3" destination="JKL-P2-zdK" id="niu-Ni-WqP"/>
-                        <outlet property="card4" destination="ZIr-1H-WXI" id="8ZJ-ai-cHx"/>
-                        <outlet property="card5" destination="XCy-XC-dUM" id="Eou-TQ-7Hs"/>
                         <outlet property="checkButton" destination="zOa-t2-NSj" id="Tgl-ib-Wdc"/>
                         <outlet property="moneyLabel" destination="EuW-O1-kn3" id="0zD-xG-ew9"/>
                         <outlet property="potLabel" destination="FJR-Nd-mFg" id="Ytn-gI-XB1"/>
+                        <outletCollection property="cards" destination="SBp-Db-kPB" id="hN2-K1-715"/>
+                        <outletCollection property="cards" destination="B56-AP-BUb" id="h7Y-XL-X5e"/>
+                        <outletCollection property="cards" destination="JKL-P2-zdK" id="dGM-jh-90c"/>
+                        <outletCollection property="cards" destination="ZIr-1H-WXI" id="3iz-xS-9l5"/>
+                        <outletCollection property="cards" destination="XCy-XC-dUM" id="s7b-4c-xql"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="SZV-WD-TEh" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="677.60000000000002" y="24.7376311844078"/>
+            <point key="canvasLocation" x="686" y="25"/>
         </scene>
     </scenes>
     <resources>
