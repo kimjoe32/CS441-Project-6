@@ -7,8 +7,14 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "Card.h"
 
 @interface Deck : NSObject
+
+- (Deck *) init;
+- (void) addCardToDeck: (Card *) card;
+- (void) removeCardFromDeck: (int) index;
+- (void) shuffleDeck;
 
 @property (nonatomic, strong) NSMutableArray *cardArr;
 

@@ -25,6 +25,21 @@
     // Present the scene
     [skView presentScene:scene];
     
+    Deck *deck = [[Deck alloc] init];
+    
+    /*
+    NSLog(@"count: %lu\n", (unsigned long)[[deck cardArr] count]);
+    
+    [deck shuffleDeck];
+    
+    for(int i = 0; i < [[deck cardArr] count]; ++i){
+        Card *c = [[deck cardArr] objectAtIndex:i];
+        NSString *cardName = [c cardString];
+        
+        NSLog(@"%@\n", cardName);
+    }
+    */
+    
     skView.showsFPS = YES;
     skView.showsNodeCount = YES;
     
