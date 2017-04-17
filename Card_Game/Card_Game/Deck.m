@@ -127,8 +127,20 @@
     [[self cardArr] removeObjectAtIndex:index];
 }
 
-- (void) shuffleCards{
+- (void) shuffleDeck{
     
+    int ind1 = 0;
+    int ind2 = 0;
+    NSInteger upperBound = ([[self cardArr] count])-1;
+    for(int i = 0; i < 100; ++i){
+        
+        while(ind1 == ind2){
+            ind1 = arc4random_uniform((u_int32_t)upperBound);
+            ind2 = arc4random_uniform((u_int32_t)upperBound);
+        }
+        
+        [[self cardArr] exchangeObjectAtIndex:ind1 withObjectAtIndex:ind2];
+    }
 }
 
 @end
