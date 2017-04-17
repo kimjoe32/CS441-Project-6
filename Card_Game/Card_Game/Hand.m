@@ -50,6 +50,19 @@ NSMutableDictionary * values;
     [self addCards:card1.cardString card2:card2.cardString card3:card3.cardString card4:card4.cardString card5:card5.cardString];
 }
 
+- (void) printCards
+{
+    for (Card *c in cardObjsInHand)
+    {
+        NSLog(@"%@", c.cardString);
+    }
+    
+    for (NSString*str in cardsInHand)
+    {
+        NSLog(@"%@", str);
+    }
+}
+
 - (void) addCards: (NSString*) card1
          card2:(NSString*) card2
          card3:(NSString*) card3

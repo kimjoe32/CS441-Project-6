@@ -46,6 +46,7 @@
 @property (nonatomic) NSInteger playerTurn;
 @property (nonatomic, strong) Deck *deck;
 @property (nonatomic) bool checkBool;
+@property (strong, nonatomic) IBOutlet UILabel *playerTurnLabel;
 
 - (void) decideWinner;
 - (void) switchPlayer;

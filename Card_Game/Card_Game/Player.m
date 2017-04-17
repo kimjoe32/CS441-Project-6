@@ -40,6 +40,11 @@
     [lbl setText:[NSString stringWithFormat:@"%ld", m]];
 }
 
+- (void) printCards
+{
+    [hand printCards];
+}
+
 - (void) clearHand
 {
     [hand clearHand];
@@ -55,6 +60,16 @@
     for (int i =0; i < 5; i++)
     {
         UIImageView* sbCard = (UIImageView*) [storyboardCards objectAtIndex:i];
+        sbCard.alpha = 0;
+        
+        [UIView animateWithDuration:.5
+                         animations:^{
+                             sbCard.alpha=1;
+                         } completion:^(BOOL finished){
+                             if (finished) {
+                                 sbCard.alpha = 1;
+                             }
+                         }];
         [sbCard setImage:[[hand.cardObjsInHand objectAtIndex:i] cardImg]];
     }
 }

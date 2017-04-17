@@ -26,4 +26,5 @@
 - (void) clearHand;
 - (NSInteger) compareHandAgainst: (Player*) player2;
 - (void) setStoryboardCardsToThisPlayerCards:(NSArray*) storyboardCards;
+- (void) printCards;
 @end

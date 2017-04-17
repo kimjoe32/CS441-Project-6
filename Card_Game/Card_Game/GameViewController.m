@@ -44,18 +44,6 @@
     playerTurn = 2;
     [self switchPlayer];
     
-    /*
-    NSLog(@"count: %lu\n", (unsigned long)[[deck cardArr] count]);
-    
-    [deck shuffleDeck];
-    
-    for(int i = 0; i < [[deck cardArr] count]; ++i){
-        Card *c = [[deck cardArr] objectAtIndex:i];
-        NSString *cardName = [c cardString];
-        
-        NSLog(@"%@\n", cardName);
-    }
-    */
     skView.showsFPS = YES;
     skView.showsNodeCount = YES;
 }
@@ -149,7 +137,7 @@
     
     [self setPot:[self getPot] + _lastBet];
     
-    if(checkBool == true){
+    if(checkBool == true) {
         checkBool = false;
     }
     
@@ -162,14 +150,26 @@
     playerTurn = (playerTurn == 1)? 2 : 1;
     if (playerTurn == 1)
     {
+        [_playerTurnLabel setText:@"Player 1"];
         [player1 setStoryboardCardsToThisPlayerCards:storyboardCards];
         [_moneyLabel setText:[NSString stringWithFormat:@"%ld", (long)[player1 money]]];
     }
     else
     {
+        [_playerTurnLabel setText:@"Player 2"];
         [player2 setStoryboardCardsToThisPlayerCards:storyboardCards];
         [_moneyLabel setText:[NSString stringWithFormat:@"%ld", (long)[player2 money]]];
     }
+    _moneyLabel.font = [UIFont boldSystemFontOfSize:20];
+    _moneyLabel.transform = CGAffineTransformScale(_moneyLabel.transform, 5, 5);
+    [self.view addSubview:_moneyLabel];
+    [UIView animateWithDuration:0.5
+                     animations:^{
+                         _moneyLabel.transform = CGAffineTransformScale(_moneyLabel.transform, .2, .2);
+                     } completion:^(BOOL finished) {
+                         if (finished)
+                             _moneyLabel.font =[UIFont boldSystemFontOfSize:20];
+                     }];
 }
 
 -(void) decideWinner
@@ -223,13 +223,13 @@
         }
     }
     
-    [[player1 hand] addCardObjects:[player1Hand objectAtIndex:0]
+    [player1 receiveCards:[player1Hand objectAtIndex:0]
                              card2:[player1Hand objectAtIndex:1]
                              card3:[player1Hand objectAtIndex:2]
                              card4:[player1Hand objectAtIndex:3]
                              card5:[player1Hand objectAtIndex:4]];
     
-    [[player2 hand] addCardObjects:[player2Hand objectAtIndex:0]
+    [player2 receiveCards:[player2Hand objectAtIndex:0]
                              card2:[player2Hand objectAtIndex:1]
                              card3:[player2Hand objectAtIndex:2]
                              card4:[player2Hand objectAtIndex:3]
@@ -256,7 +256,7 @@
 }
 
 - (void) setPot: (NSInteger) newValue
-{   
+{
     [_potLabel setText:[NSString stringWithFormat:@"%ld", (long)newValue]];
 }
 

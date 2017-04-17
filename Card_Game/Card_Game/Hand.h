@@ -12,8 +12,8 @@
     
 }
 
-@property (weak) NSMutableArray* cardsInHand;
-@property (weak) NSMutableArray* cardObjsInHand;
+@property (strong) NSMutableArray* cardsInHand;
+@property (strong) NSMutableArray* cardObjsInHand;
 - (Hand*) init;
 - (void) addCards: (NSString*) card1
               card2:(NSString*) card2
@@ -31,5 +31,6 @@
 - (NSInteger) compare: (NSString*) s1
                    s2: (NSString*) s2;
 - (void) clearHand;
+- (void) printCards;
 
 @end
