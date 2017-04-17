@@ -17,7 +17,7 @@
 - (void) clearDeck;
 - (void) remakeDeck;
 - (void) shuffleDeck;
-
+- (NSInteger) count;
 @property (nonatomic, strong) NSMutableArray *cardArr;
 
 @end

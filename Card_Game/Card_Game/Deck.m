@@ -13,7 +13,7 @@
 
 -(Deck *) init{
     //need super init here??
-    
+    self = [super init];
     self.cardArr = [[NSMutableArray alloc] init];
     
     [self remakeDeck];
@@ -46,7 +46,6 @@
         for(int j = 0; j < 13; j++){
             NSString *currentCardStr;
             currentCard = j+2;
-            
             //clubs
             if(i == 0){
                 
@@ -150,7 +149,11 @@
             }
         }
     }
+}
 
+- (NSInteger) count
+{
+    return [_cardArr count];
 }
 
 - (void) shuffleDeck{

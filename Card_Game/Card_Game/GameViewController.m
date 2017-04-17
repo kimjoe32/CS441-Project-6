@@ -18,9 +18,10 @@
 @synthesize deck;
 
 - (void)viewDidLoad {
-    
     [super viewDidLoad];
-    playerTurn = 1;
+    
+    [self.betAmountInputField setDelegate:self];
+    
     // Load the SKScene from 'GameScene.sks'
     GameScene *scene = (GameScene *)[SKScene nodeWithFileNamed:@"GameScene"];
     
@@ -32,6 +33,24 @@
     // Present the scene
     [skView presentScene:scene];
     deck = [[Deck alloc] init];
+
+    //create players and give them cards
+    player1 = [[Player alloc] init];
+    player2 = [[Player alloc] init];
+    [self populateHands];
+    for(Card* c in player1.hand.cardObjsInHand)
+    {
+        NSLog(@"%@", c.cardString);
+    }
+    NSLog(@"*************");
+    for(Card* c in player2.hand.cardObjsInHand)
+    {
+        NSLog(@"%@", c.cardString);
+    }
+    
+    //player 1 goes first, but switchPlayer will set it to player and show player1's cards
+    playerTurn = 2;
+    [self switchPlayer];
     
     /*
     NSLog(@"count: %lu\n", (unsigned long)[[deck cardArr] count]);
@@ -48,7 +67,6 @@
     
     skView.showsFPS = YES;
     skView.showsNodeCount = YES;
-    
 }
 
 
@@ -91,12 +109,12 @@
     if (playerTurn == 1)
     {
         [player1 setStoryboardCardsToThisPlayerCards:storyboardCards];
-        [_moneyLabel setText:[NSString stringWithFormat:@"%.02f", [player1 money]]];
+        [_moneyLabel setText:[NSString stringWithFormat:@"%ld", (long)[player1 money]]];
     }
     else
     {
         [player2 setStoryboardCardsToThisPlayerCards:storyboardCards];
-        [_moneyLabel setText:[NSString stringWithFormat:@"%.02f", [player2 money]]];
+        [_moneyLabel setText:[NSString stringWithFormat:@"%ld", (long)[player2 money]]];
     }
 }
 
@@ -119,7 +137,7 @@
     //player1 starts
     playerTurn = 1;
     [player1 setStoryboardCardsToThisPlayerCards:storyboardCards];
-    [_moneyLabel setText:[NSString stringWithFormat:@"%.02f", [player1 money]]];
+    [_moneyLabel setText:[NSString stringWithFormat:@"%ld", (long)[player1 money]]];
     _lastBet = 0;
     
     //MATT: add new cards to their hands
@@ -129,6 +147,11 @@
     [deck shuffleDeck];
     
     //Needs testing
+    [self populateHands];
+}
+
+- (void) populateHands
+{
     NSMutableArray *player1Hand = [[NSMutableArray alloc] init];
     NSMutableArray *player2Hand = [[NSMutableArray alloc] init];
     
@@ -144,60 +167,66 @@
         }
     }
     
-    [[player1 hand] addCards:[[player1Hand objectAtIndex:0] cardString] card2:[[player1Hand objectAtIndex:1] cardString] card3:[[player1Hand objectAtIndex:2] cardString] card4:[[player1Hand objectAtIndex:3] cardString] card5:[[player1Hand objectAtIndex:4] cardString]];
+    [[player1 hand] addCardObjects:[player1Hand objectAtIndex:0]
+                             card2:[player1Hand objectAtIndex:1]
+                             card3:[player1Hand objectAtIndex:2]
+                             card4:[player1Hand objectAtIndex:3]
+                             card5:[player1Hand objectAtIndex:4]];
     
-    [[player1 hand] addCardObjects:[player1Hand objectAtIndex:0] card2:[player1Hand objectAtIndex:1] card3:[player1Hand objectAtIndex:2] card4:[player1Hand objectAtIndex:3] card5:[player1Hand objectAtIndex:4]];
-    
-    [[player2 hand] addCards:[[player2Hand objectAtIndex:0] cardString] card2:[[player2Hand objectAtIndex:1] cardString] card3:[[player2Hand objectAtIndex:2] cardString] card4:[[player2Hand objectAtIndex:3] cardString] card5:[[player2Hand objectAtIndex:4] cardString]];
-    
-    [[player2 hand] addCardObjects:[player2Hand objectAtIndex:0] card2:[player2Hand objectAtIndex:1] card3:[player2Hand objectAtIndex:2] card4:[player2Hand objectAtIndex:3] card5:[player2Hand objectAtIndex:4]];
+    [[player2 hand] addCardObjects:[player2Hand objectAtIndex:0]
+                             card2:[player2Hand objectAtIndex:1]
+                             card3:[player2Hand objectAtIndex:2]
+                             card4:[player2Hand objectAtIndex:3]
+                             card5:[player2Hand objectAtIndex:4]];
 }
 
-- (float) getMoney
+- (NSInteger) getMoney
 {
     //get the value stored at the moneyLabel
     NSNumberFormatter *nf = [[NSNumberFormatter alloc] init];
     [nf setNumberStyle:NSNumberFormatterCurrencyStyle];
     NSNumber *number = [nf numberFromString:[_moneyLabel text]];
-    float f = [number floatValue];
+    NSInteger f = [number integerValue];
     return f;
 }
 
-- (float) getPot
+- (NSInteger) getPot
 {
     //get the value stored at the potLabel
     NSNumberFormatter *nf = [[NSNumberFormatter alloc] init];
     [nf setNumberStyle:NSNumberFormatterCurrencyStyle];
     NSNumber *number = [nf numberFromString:[_potLabel text]];
-    float f = [number floatValue];
+    NSInteger f = [number integerValue];
     return f;
 }
 
-- (void) setMoney: (float) newValue
+- (void) setMoney: (NSInteger) newValue
 {
-    [_moneyLabel setText:[NSString stringWithFormat:@"$%.02f", newValue]];
+    [_moneyLabel setText:[NSString stringWithFormat:@"$%ld", (long)newValue]];
 }
 
-- (void) setPot: (float) newValue
+- (void) setPot: (NSInteger) newValue
 {
-    [_potLabel setText:[NSString stringWithFormat:@"$%.02f", newValue]];
+    [_potLabel setText:[NSString stringWithFormat:@"$%ld", (long)newValue]];
 }
 
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField
 {
-    float bet = [[textField text] floatValue]; // TODO:check to see if this will work with "2" and "2.0"
-    
+    NSInteger bet = [[textField text] integerValue];
+    NSLog(@"starting");
     //check for invalid input
     if (bet > [self getMoney] ||//bet is greater than available money
         bet <= _lastBet           //bet is <= last bet from other player
         //TODO: make sure there's no other forms of invalid input
         )
     {
+        NSLog(@"Bad Input");
         return NO;
     }
     else //valid input given
     {
+        NSLog(@"Good Input");
         [self setPot:bet + [self getPot]];//increase pot size
         
         //subtract bet from players money

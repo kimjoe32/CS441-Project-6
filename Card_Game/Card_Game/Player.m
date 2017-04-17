@@ -10,6 +10,15 @@
 @implementation Player
 @synthesize hand;
 @synthesize money;
+
+-(Player*) init
+{
+    self = [super init];
+    money = 500;
+    hand = [[Hand alloc] init];
+    return self;
+}
+
 - (void) receiveCards: (Card*) card1
                 card2:(Card*) card2
                 card3:(Card*) card3
@@ -19,12 +28,12 @@
     [hand addCardObjects:card1 card2:card2 card3:card3 card4:card4 card5:card5];
 }
 
-- (void) addMoney: (float) m
+- (void) addMoney: (NSInteger) m
 {
     money += m;
 }
 
-- (void) subtractMoney: (float) m
+- (void) subtractMoney: (NSInteger) m
 {
     money -= m;
 }
@@ -44,7 +53,7 @@
     for (int i =0; i < 4; i++)
     {
         UIImageView* sbCard = (UIImageView*) [storyboardCards objectAtIndex:i];
-        [sbCard setImage:[hand.cardObjsInHand objectAtIndex:i]];
+        [sbCard setImage:[[hand.cardObjsInHand objectAtIndex:i] cardImg]];
     }
 }
 @end

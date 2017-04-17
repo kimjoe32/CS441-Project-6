@@ -9,7 +9,6 @@
 /* Begin PBXBuildFile section */
 		6CFD33561EA41878006CB802 /* Hand.m in Sources */ = {isa = PBXBuildFile; fileRef = 6CFD33551EA41878006CB802 /* Hand.m */; };
 		6CFD33591EA45281006CB802 /* Player.m in Sources */ = {isa = PBXBuildFile; fileRef = 6CFD33581EA45281006CB802 /* Player.m */; };
-		6CFD335D1EA460C5006CB802 /* utilities.m in Sources */ = {isa = PBXBuildFile; fileRef = 6CFD335C1EA460C5006CB802 /* utilities.m */; };
 		C9484B351EA42E9D001F9875 /* Deck.m in Sources */ = {isa = PBXBuildFile; fileRef = C9484B341EA42E9D001F9875 /* Deck.m */; };
 		C98537EC1E95D4CC0046C358 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = C98537EB1E95D4CC0046C358 /* main.m */; };
 		C98537EF1E95D4CC0046C358 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = C98537EE1E95D4CC0046C358 /* AppDelegate.m */; };
@@ -47,7 +46,6 @@
 		6CFD33551EA41878006CB802 /* Hand.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Hand.m; sourceTree = "<group>"; };
 		6CFD33571EA45276006CB802 /* Player.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Player.h; sourceTree = "<group>"; };
 		6CFD33581EA45281006CB802 /* Player.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Player.m; sourceTree = "<group>"; };
-		6CFD335C1EA460C5006CB802 /* utilities.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = utilities.m; sourceTree = "<group>"; };
 		C9484B331EA42E9D001F9875 /* Deck.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Deck.h; sourceTree = "<group>"; };
 		C9484B341EA42E9D001F9875 /* Deck.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Deck.m; sourceTree = "<group>"; };
 		C98537E71E95D4CC0046C358 /* Card_Game.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Card_Game.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -151,7 +149,6 @@
 				6CFD33571EA45276006CB802 /* Player.h */,
 				6CFD33581EA45281006CB802 /* Player.m */,
 				C98537EB1E95D4CC0046C358 /* main.m */,
-				6CFD335C1EA460C5006CB802 /* utilities.m */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -312,7 +309,6 @@
 				6CFD33591EA45281006CB802 /* Player.m in Sources */,
 				6CFD33561EA41878006CB802 /* Hand.m in Sources */,
 				C9484B351EA42E9D001F9875 /* Deck.m in Sources */,
-				6CFD335D1EA460C5006CB802 /* utilities.m in Sources */,
 				C98537F91E95D4CC0046C358 /* GameViewController.m in Sources */,
 				C98537EF1E95D4CC0046C358 /* AppDelegate.m in Sources */,
 				C98537F61E95D4CC0046C358 /* GameScene.m in Sources */,
