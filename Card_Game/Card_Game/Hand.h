@@ -30,5 +30,6 @@
 - (NSInteger) checkWinnerAgainst: (Hand*) p2;
 - (NSInteger) compare: (NSString*) s1
                    s2: (NSString*) s2;
+- (void) clearHand;
 
 @end

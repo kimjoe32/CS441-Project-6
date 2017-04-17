@@ -454,5 +454,11 @@ NSMutableDictionary * values;
         }
     }
 }
+
+- (void) clearHand
+{
+    [cardObjsInHand removeAllObjects];
+    [cardsInHand removeAllObjects];
+}
 @end
 
