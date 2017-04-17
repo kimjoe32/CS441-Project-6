@@ -10,6 +10,7 @@
 #import "Hand.h"
 @implementation Hand
 @synthesize cardsInHand;
+@synthesize cardObjsInHand;
 
 NSMutableDictionary * values;
 
@@ -39,6 +40,16 @@ NSMutableDictionary * values;
     return self;
 }
 
+- (void) addCardObjects: (Card*) card1
+            card2: (Card*) card2
+            card3: (Card*) card3
+            card4: (Card*) card4
+            card5: (Card*) card5
+{
+    cardObjsInHand = [NSMutableArray arrayWithObjects:card1,card2,card3,card4,card5,nil];
+    [self addCards:card1.cardString card2:card2.cardString card3:card3.cardString card4:card4.cardString card5:card5.cardString];
+}
+
 - (void) addCards: (NSString*) card1
          card2:(NSString*) card2
          card3:(NSString*) card3
@@ -46,7 +57,6 @@ NSMutableDictionary * values;
          card5:(NSString*) card5
 {
     cardsInHand = [NSMutableArray arrayWithObjects:card1,card2,card3,card4,card5,nil];
-    
     //sort strings based on card#
     [cardsInHand sortUsingSelector:@selector(localizedCaseInsensitiveCompare:)];
     [self sortAgain];
@@ -198,8 +208,8 @@ NSMutableDictionary * values;
 
 -(NSInteger) checkWinnerAgainst: (Hand*) p2
 {
-    NSString* p1result = [self checkHand];  NSLog(@"%@", p1result);
-    NSString* p2result = [p2 checkHand];    NSLog(@"%@", p2result);
+    NSString* p1result = [self checkHand];  //NSLog(@"%@", p1result);
+    NSString* p2result = [p2 checkHand];    //NSLog(@"%@", p2result);
 
 //    NSLog(@"%@ %@ %@ %@ %@", [cardsInHand objectAtIndex:0], [cardsInHand objectAtIndex:1], [cardsInHand objectAtIndex:2], [cardsInHand objectAtIndex:3], [cardsInHand objectAtIndex:4] );
 //    NSLog(@"%@ %@ %@ %@ %@", [p2.cardsInHand objectAtIndex:0], [p2.cardsInHand objectAtIndex:1], [p2.cardsInHand objectAtIndex:2], [p2.cardsInHand objectAtIndex:3], [p2.cardsInHand objectAtIndex:4] );

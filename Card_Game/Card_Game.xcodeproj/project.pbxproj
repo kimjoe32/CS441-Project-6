@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		6CFD33561EA41878006CB802 /* Hand.m in Sources */ = {isa = PBXBuildFile; fileRef = 6CFD33551EA41878006CB802 /* Hand.m */; };
+		6CFD33591EA45281006CB802 /* Player.m in Sources */ = {isa = PBXBuildFile; fileRef = 6CFD33581EA45281006CB802 /* Player.m */; };
 		C9484B351EA42E9D001F9875 /* Deck.m in Sources */ = {isa = PBXBuildFile; fileRef = C9484B341EA42E9D001F9875 /* Deck.m */; };
 		C98537EC1E95D4CC0046C358 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = C98537EB1E95D4CC0046C358 /* main.m */; };
 		C98537EF1E95D4CC0046C358 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = C98537EE1E95D4CC0046C358 /* AppDelegate.m */; };
@@ -43,6 +44,8 @@
 /* Begin PBXFileReference section */
 		6CFD33541EA41878006CB802 /* Hand.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Hand.h; sourceTree = "<group>"; };
 		6CFD33551EA41878006CB802 /* Hand.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Hand.m; sourceTree = "<group>"; };
+		6CFD33571EA45276006CB802 /* Player.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Player.h; sourceTree = "<group>"; };
+		6CFD33581EA45281006CB802 /* Player.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Player.m; sourceTree = "<group>"; };
 		C9484B331EA42E9D001F9875 /* Deck.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Deck.h; sourceTree = "<group>"; };
 		C9484B341EA42E9D001F9875 /* Deck.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Deck.m; sourceTree = "<group>"; };
 		C98537E71E95D4CC0046C358 /* Card_Game.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Card_Game.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -123,8 +126,6 @@
 				C98537F21E95D4CC0046C358 /* Actions.sks */,
 				C98537F41E95D4CC0046C358 /* GameScene.h */,
 				C98537F51E95D4CC0046C358 /* GameScene.m */,
-				6CFD33541EA41878006CB802 /* Hand.h */,
-				6CFD33551EA41878006CB802 /* Hand.m */,
 				C98537F71E95D4CC0046C358 /* GameViewController.h */,
 				C98537F81E95D4CC0046C358 /* GameViewController.m */,
 				C98537FA1E95D4CC0046C358 /* Main.storyboard */,
@@ -132,10 +133,6 @@
 				C98537FF1E95D4CC0046C358 /* LaunchScreen.storyboard */,
 				C98538021E95D4CC0046C358 /* Info.plist */,
 				C98537EA1E95D4CC0046C358 /* Supporting Files */,
-				C9B000921EA424330009F424 /* Card.h */,
-				C9B000931EA424330009F424 /* Card.m */,
-				C9484B331EA42E9D001F9875 /* Deck.h */,
-				C9484B341EA42E9D001F9875 /* Deck.m */,
 			);
 			path = Card_Game;
 			sourceTree = "<group>";
@@ -143,6 +140,14 @@
 		C98537EA1E95D4CC0046C358 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				C9B000921EA424330009F424 /* Card.h */,
+				C9B000931EA424330009F424 /* Card.m */,
+				C9484B331EA42E9D001F9875 /* Deck.h */,
+				C9484B341EA42E9D001F9875 /* Deck.m */,
+				6CFD33541EA41878006CB802 /* Hand.h */,
+				6CFD33551EA41878006CB802 /* Hand.m */,
+				6CFD33571EA45276006CB802 /* Player.h */,
+				6CFD33581EA45281006CB802 /* Player.m */,
 				C98537EB1E95D4CC0046C358 /* main.m */,
 			);
 			name = "Supporting Files";
@@ -301,6 +306,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6CFD33591EA45281006CB802 /* Player.m in Sources */,
 				6CFD33561EA41878006CB802 /* Hand.m in Sources */,
 				C9484B351EA42E9D001F9875 /* Deck.m in Sources */,
 				C98537F91E95D4CC0046C358 /* GameViewController.m in Sources */,
