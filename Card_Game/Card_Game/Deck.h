@@ -14,6 +14,8 @@
 - (Deck *) init;
 - (void) addCardToDeck: (Card *) card;
 - (void) removeCardFromDeck: (int) index;
+- (void) clearDeck;
+- (void) remakeDeck;
 - (void) shuffleDeck;
 
 @property (nonatomic, strong) NSMutableArray *cardArr;

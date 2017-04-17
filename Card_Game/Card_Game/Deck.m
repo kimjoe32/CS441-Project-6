@@ -15,6 +15,25 @@
     
     self.cardArr = [[NSMutableArray alloc] init];
     
+    [self remakeDeck];
+    //NSLog(@"%lu\n", (unsigned long)[[self cardArr] count]);
+    return self;
+}
+
+- (void) addCardToDeck: (Card *) card{
+    [[self cardArr] addObject:card];
+}
+
+- (void) removeCardFromDeck: (int) index{
+    [[self cardArr] removeObjectAtIndex:index];
+}
+
+- (void) clearDeck{
+    
+    [[self cardArr] removeAllObjects];
+}
+
+- (void) remakeDeck{
     int currentCard;
     for(int i = 0; i < 4; ++i){
         
@@ -125,16 +144,7 @@
             }
         }
     }
-    //NSLog(@"%lu\n", (unsigned long)[[self cardArr] count]);
-    return self;
-}
 
-- (void) addCardToDeck: (Card *) card{
-    [[self cardArr] addObject:card];
-}
-
-- (void) removeCardFromDeck: (int) index{
-    [[self cardArr] removeObjectAtIndex:index];
 }
 
 - (void) shuffleDeck{
