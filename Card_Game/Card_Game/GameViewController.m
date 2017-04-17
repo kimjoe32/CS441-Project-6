@@ -69,6 +69,7 @@
     
     if(checkBool == false && playerTurn == 1){ //player 1 checks first
         checkBool = true;
+        [self switchPlayer];
     }
     else if(checkBool == true && playerTurn == 2){ //player 2 checks after player 1 checks
         //resolve game
@@ -76,7 +77,6 @@
         checkBool = false;
     }
     
-    [self switchPlayer];
 }
 
 - (IBAction)confirmBetAction:(id)sender
@@ -197,6 +197,7 @@
     
     //player1 starts
     playerTurn = 1;
+    [_playerTurnLabel setText:@"Player 1"];
     [player1 setStoryboardCardsToThisPlayerCards:storyboardCards];
     [_moneyLabel setText:[NSString stringWithFormat:@"%ld", (long)[player1 money]]];
     _lastBet = 0;
