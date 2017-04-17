@@ -63,9 +63,7 @@
     [_confirmBet setHidden:FALSE]; //*****
 }
 
-- (IBAction)checkAction:(id)sender
-{
-    //MATT: need logic if both players check at the beginning
+- (IBAction)checkAction:(id)sender{
     
     if(checkBool == false && playerTurn == 1){ //player 1 checks first
         checkBool = true;
@@ -87,7 +85,7 @@
     //check for invalid input
     if (bet > [self getMoney] ||//bet is greater than available money
         bet <= _lastBet           //raise is <= last bet from other player
-        //TODO: make sure there's no other forms of invalid input
+        //make sure there's no other forms of invalid input
         )
     {
         NSLog(@"Bad Input : %ld, available money = %ld", (long)bet, (long) [self getMoney]);
@@ -201,10 +199,6 @@
     [player1 setStoryboardCardsToThisPlayerCards:storyboardCards];
     [_moneyLabel setText:[NSString stringWithFormat:@"%ld", (long)[player1 money]]];
     _lastBet = 0;
-    
-    //MATT: add new cards to their hands
-    
-    
 }
 
 - (void) populateHands
