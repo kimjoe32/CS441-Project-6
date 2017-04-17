@@ -161,12 +161,7 @@
     
     [self setPot:[self getPot] + _lastBet];
     
-    if(checkBool == false && playerTurn == 1){ //player 1 checks first
-        checkBool = true;
-    }
-    else if(checkBool == true && playerTurn == 2){ //player 2 checks after player 1 checks
-        //resolve game
-        [self decideWinner];
+    if(checkBool == true){
         checkBool = false;
     }
     
