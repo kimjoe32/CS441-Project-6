@@ -30,7 +30,14 @@
 - (IBAction)betAction:(id)sender;
 
 @property (strong, nonatomic) IBOutlet UITextField *betAmountInputField;
-- (BOOL)textFieldShouldReturn:(UITextField *)textField;
+
+@property (strong, nonatomic) IBOutlet UIButton *confirmBet;
+- (IBAction)confirmBetAction:(id)sender;
+
+@property (strong, nonatomic) IBOutlet UIButton *raiseButton;
+
+@property (strong, nonatomic) IBOutlet UIButton *callButton;
+- (IBAction)callAction:(id)sender;
 
 @property (nonatomic) NSInteger lastBet;
 @property (nonatomic, retain) IBOutletCollection(UIImageView) NSArray* storyboardCards;
@@ -38,6 +45,7 @@
 @property (strong, nonatomic) Player * player2;
 @property (nonatomic) NSInteger playerTurn;
 @property (nonatomic, strong) Deck *deck;
+@property (nonatomic) bool checkBool;
 
 - (void) decideWinner;
 - (void) switchPlayer;

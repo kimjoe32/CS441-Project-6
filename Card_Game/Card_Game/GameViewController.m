@@ -16,6 +16,7 @@
 @synthesize player2;
 @synthesize storyboardCards;
 @synthesize deck;
+@synthesize checkBool;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -33,7 +34,8 @@
     // Present the scene
     [skView presentScene:scene];
     deck = [[Deck alloc] init];
-
+    
+    checkBool = false;
     //create players and give them cards
     player1 = [[Player alloc] init];
     player2 = [[Player alloc] init];
@@ -69,7 +71,6 @@
     skView.showsNodeCount = YES;
 }
 
-
 - (IBAction)betAction:(id)sender
 {
     //can't press these buttons while inputting bet amount
@@ -77,11 +78,73 @@
     [_checkButton setEnabled:FALSE];
     [_betAmountInputField setHidden:FALSE];
     [_betAmountInputField setEnabled:TRUE];
+    
+    if(checkBool == true){
+        checkBool = false;
+    }
 }
 
 - (IBAction)checkAction:(id)sender
 {
     //MATT: need logic if both players check at the beginning
+    
+    if(checkBool == false && playerTurn == 1){ //player 1 checks first
+        checkBool = true;
+    }
+    else if(checkBool == true && playerTurn == 2){ //player 2 checks after player 1 checks
+        //resolve game
+        [self decideWinner];
+        checkBool = false;
+    }
+    
+    [self switchPlayer];
+}
+
+//*****
+- (IBAction)confirmBetAction:(id)sender
+{
+    //also handles raises
+    NSInteger bet = [[_betAmountInputField text] integerValue];
+    //check for invalid input
+    if (bet > [self getMoney] ||//bet is greater than available money
+        bet <= _lastBet           //raise is <= last bet from other player
+        //TODO: make sure there's no other forms of invalid input
+        )
+    {
+        NSLog(@"Bad Input : %ld", (long)bet);
+    }
+    else //valid input given
+    {
+        NSLog(@"Good Input : %ld", (long)bet);
+        [self setPot:bet + [self getPot]];//increase pot size
+        
+        //subtract bet from players money
+        if (playerTurn == 1)
+        {
+            [player1 subtractMoney:bet label: _moneyLabel];
+        }
+        else
+        {
+            [player2 subtractMoney:bet label: _moneyLabel];
+        }
+        _betAmountInputField.text = @"";//clear text
+        [_betAmountInputField setEnabled:FALSE];//hide textfield
+        [_betAmountInputField setHidden:TRUE];
+        
+        [_confirmBet setEnabled:FALSE];
+        [_confirmBet setHidden:TRUE];
+        
+        //enable bet and check buttons
+        [_betButton setEnabled:TRUE];
+        [_checkButton setEnabled:TRUE];
+        
+        _lastBet = bet;
+        [self switchPlayer];
+    }
+}
+
+- (IBAction) callAction:(id)sender
+{
     if (playerTurn == 1)
     {
         [player1 subtractMoney:_lastBet label: _moneyLabel];
@@ -92,13 +155,8 @@
     }
     
     [self setPot:[self getPot] + _lastBet];
-    
-    if (_lastBet > 0) //if checked after other player bets, decide winner
-    {
-        [self decideWinner];
-    }
-    [self switchPlayer];
 }
+//*****
 
 -(void) switchPlayer
 {
@@ -201,47 +259,6 @@
 {
     [_potLabel setText:[NSString stringWithFormat:@"$%ld", (long)newValue]];
 }
-
-
-- (BOOL)textFieldShouldReturn:(UITextField *)textField
-{
-    NSInteger bet = [[textField text] integerValue];
-    //check for invalid input
-    if (bet > [self getMoney] ||//bet is greater than available money
-        bet <= _lastBet           //bet is <= last bet from other player
-        //TODO: make sure there's no other forms of invalid input
-        )
-    {
-        return NO;
-    }
-    else //valid input given
-    {
-        [self setPot:bet + [self getPot]];//increase pot size
-        
-        //subtract bet from players money
-        if (playerTurn == 1)
-        {
-            [player1 subtractMoney:bet label: _moneyLabel];
-        }
-        else
-        {
-            [player2 subtractMoney:bet label: _moneyLabel];
-        }
-        textField.text = @"";//clear text
-        [textField setEnabled:FALSE];//hide textfield
-        [textField setHidden:TRUE];
-        
-        //enable bet and check buttons
-        [_betButton setEnabled:TRUE];
-        [_checkButton setEnabled:TRUE];
-        
-        _lastBet = bet;
-        [self switchPlayer];
-        return YES;
-    }
-}
-
-
 
 - (BOOL)shouldAutorotate {
     return YES;
