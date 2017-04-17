@@ -97,7 +97,6 @@
         NSLog(@"Good Input : %ld", (long)bet);
         
         [self setPot:bet + [self getPot]];//increase pot size
-        
         //subtract bet from players money
         if (playerTurn == 1)
         {
@@ -136,7 +135,6 @@
     }
     
     [self setPot:[self getPot] + _lastBet];
-    
     if(checkBool == true) {
         checkBool = false;
     }
@@ -160,6 +158,12 @@
         [player2 setStoryboardCardsToThisPlayerCards:storyboardCards];
         [_moneyLabel setText:[NSString stringWithFormat:@"%ld", (long)[player2 money]]];
     }
+    
+    [self animateMoneyLabel];
+}
+
+- (void) animateMoneyLabel
+{
     _moneyLabel.font = [UIFont boldSystemFontOfSize:20];
     _moneyLabel.transform = CGAffineTransformScale(_moneyLabel.transform, 5, 5);
     [self.view addSubview:_moneyLabel];
@@ -169,6 +173,20 @@
                      } completion:^(BOOL finished) {
                          if (finished)
                              _moneyLabel.font =[UIFont boldSystemFontOfSize:20];
+                     }];
+}
+
+- (void) animatePotLabel
+{
+    _potLabel.font = [UIFont boldSystemFontOfSize:20];
+    _potLabel.transform = CGAffineTransformScale(_potLabel.transform, 5, 5);
+    [self.view addSubview:_potLabel];
+    [UIView animateWithDuration:0.5
+                     animations:^{
+                         _potLabel.transform = CGAffineTransformScale(_potLabel.transform, .2, .2);
+                     } completion:^(BOOL finished) {
+                         if (finished)
+                             _potLabel.font =[UIFont boldSystemFontOfSize:20];
                      }];
 }
 
@@ -258,6 +276,7 @@
 - (void) setPot: (NSInteger) newValue
 {
     [_potLabel setText:[NSString stringWithFormat:@"%ld", (long)newValue]];
+    [self animatePotLabel];
 }
 
 - (BOOL)shouldAutorotate {

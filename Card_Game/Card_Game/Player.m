@@ -62,7 +62,7 @@
         UIImageView* sbCard = (UIImageView*) [storyboardCards objectAtIndex:i];
         sbCard.alpha = 0;
         
-        [UIView animateWithDuration:.5
+        [UIView animateWithDuration:1
                          animations:^{
                              sbCard.alpha=1;
                          } completion:^(BOOL finished){
