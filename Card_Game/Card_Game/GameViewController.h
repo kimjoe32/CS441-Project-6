@@ -30,6 +30,7 @@
 - (IBAction)betAction:(id)sender;
 
 @property (strong, nonatomic) IBOutlet UITextField *betAmountInputField;
+<<<<<<< HEAD
 
 @property (strong, nonatomic) IBOutlet UIButton *confirmBet;
 - (IBAction)confirmBetAction:(id)sender;
@@ -38,6 +39,8 @@
 
 @property (strong, nonatomic) IBOutlet UIButton *callButton;
 - (IBAction)callAction:(id)sender;
+=======
+>>>>>>> a6bd3028585b02fb2f858bb0308196a405206ba8
 
 @property (nonatomic) NSInteger lastBet;
 @property (nonatomic, retain) IBOutletCollection(UIImageView) NSArray* storyboardCards;
