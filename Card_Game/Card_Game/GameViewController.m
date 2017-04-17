@@ -77,8 +77,6 @@
     [_checkButton setEnabled:FALSE];
     [_betAmountInputField setHidden:FALSE];
     [_betAmountInputField setEnabled:TRUE];
-    
-    [self switchPlayer];
 }
 
 - (IBAction)checkAction:(id)sender
@@ -86,11 +84,11 @@
     //MATT: need logic if both players check at the beginning
     if (playerTurn == 1)
     {
-        [player1 subtractMoney:_lastBet];
+        [player1 subtractMoney:_lastBet label: _moneyLabel];
     }
     else
     {
-        [player2 subtractMoney:_lastBet];
+        [player2 subtractMoney:_lastBet label: _moneyLabel];
     }
     
     [self setPot:[self getPot] + _lastBet];
@@ -123,11 +121,11 @@
     NSInteger result = [player1 compareHandAgainst:player2]; // -1 = tie, 0 = player1 wins, 1 = player2 wins
     if (result == 0)
     {
-        [player1 addMoney:[self getPot]];
+        [player1 addMoney:[self getPot] label: _moneyLabel];
     }
     else if (result == 1)
     {
-        [player2 addMoney:[self getPot]];
+        [player2 addMoney:[self getPot] label: _moneyLabel];
     }
     
     [self setPot:0];
@@ -208,30 +206,26 @@
 - (BOOL)textFieldShouldReturn:(UITextField *)textField
 {
     NSInteger bet = [[textField text] integerValue];
-    NSLog(@"starting with bet: %ld", (long)bet);
-    NSLog(@"money = %ld", [self getMoney]);
     //check for invalid input
     if (bet > [self getMoney] ||//bet is greater than available money
         bet <= _lastBet           //bet is <= last bet from other player
         //TODO: make sure there's no other forms of invalid input
         )
     {
-        NSLog(@"Bad Input");
         return NO;
     }
     else //valid input given
     {
-        NSLog(@"Good Input");
         [self setPot:bet + [self getPot]];//increase pot size
         
         //subtract bet from players money
         if (playerTurn == 1)
         {
-            [player1 subtractMoney:bet];
+            [player1 subtractMoney:bet label: _moneyLabel];
         }
         else
         {
-            [player2 subtractMoney:bet];
+            [player2 subtractMoney:bet label: _moneyLabel];
         }
         textField.text = @"";//clear text
         [textField setEnabled:FALSE];//hide textfield
@@ -242,6 +236,7 @@
         [_checkButton setEnabled:TRUE];
         
         _lastBet = bet;
+        [self switchPlayer];
         return YES;
     }
 }

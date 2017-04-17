@@ -28,14 +28,16 @@
     [hand addCardObjects:card1 card2:card2 card3:card3 card4:card4 card5:card5];
 }
 
-- (void) addMoney: (NSInteger) m
+- (void) addMoney: (NSInteger) m label:(UILabel*) lbl;
 {
     money += m;
+    [lbl setText:[NSString stringWithFormat:@"%ld", m]];
 }
 
-- (void) subtractMoney: (NSInteger) m
+- (void) subtractMoney: (NSInteger) m label:(UILabel*) lbl;
 {
     money -= m;
+    [lbl setText:[NSString stringWithFormat:@"%ld", m]];
 }
 
 - (void) clearHand

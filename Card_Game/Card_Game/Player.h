@@ -21,8 +21,8 @@
                 card4:(Card*) card4
                 card5:(Card*) card5;
 
-- (void) addMoney: (NSInteger) m;
-- (void) subtractMoney: (NSInteger) m;
+- (void) addMoney: (NSInteger) m label:(UILabel*) lbl;;
+- (void) subtractMoney: (NSInteger) m label:(UILabel*) lbl;
 - (void) clearHand;
 - (NSInteger) compareHandAgainst: (Player*) player2;
 - (void) setStoryboardCardsToThisPlayerCards:(NSArray*) storyboardCards;
