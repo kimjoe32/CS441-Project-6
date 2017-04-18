@@ -30,6 +30,8 @@
     
     SKView *skView = (SKView *)self.view;
     
+    [self.view addSubview:_winnerLabel];
+    
     // Present the scene
     [skView presentScene:scene];
     deck = [[Deck alloc] init];
@@ -187,6 +189,27 @@
                              _potLabel.font =[UIFont boldSystemFontOfSize:20];
                      }];
 }
+
+- (void) displayWinnerLabel: (NSString*) victor{
+    
+    [_winnerLabel setHidden:FALSE];
+    
+    NSString *winnings = [_potLabel text];
+    NSString *msg = @" has won $";
+    NSString *playerMsg = [victor stringByAppendingString:msg];
+    NSString *displayText = [playerMsg stringByAppendingString:winnings];
+    
+    [_winnerLabel setText:displayText];
+    
+    [UIView animateWithDuration:3
+                     animations:^{
+                         _winnerLabel.transform = CGAffineTransformScale(_winnerLabel.transform, .2, .2);
+                     } completion:^(BOOL finished) {
+                         if (finished)
+                             [_winnerLabel setHidden:TRUE];
+                     }];
+}
+
 
 -(void) decideWinner
 {
