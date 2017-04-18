@@ -70,13 +70,22 @@
     if(checkBool == false && playerTurn == 1){ //player 1 checks first
         checkBool = true;
         [self switchPlayer];
+        [_checkButton setEnabled:TRUE];
     }
     else if(checkBool == true && playerTurn == 2){ //player 2 checks after player 1 checks
         //resolve game
         [self decideWinner];
         checkBool = false;
     }
-    
+    else
+    {
+        [self decideWinner];
+        [_checkButton setEnabled:TRUE];
+    }
+    //if player pressed check, can't call raise or call after
+    [_raiseButton setEnabled:FALSE];
+    [_callButton setEnabled:FALSE];
+    [_betButton setEnabled:TRUE];
 }
 
 - (IBAction)confirmBetAction:(id)sender
@@ -119,6 +128,13 @@
         
         _lastBet = bet;
         [self switchPlayer];
+        
+        //if raise/bet button is pressed, next player can't press bet or check
+        [_checkButton setEnabled:FALSE];
+        [_betButton setEnabled:FALSE];
+        
+        [_raiseButton setEnabled:TRUE];
+        [_callButton setEnabled:TRUE];
     }
 }
 
@@ -140,6 +156,13 @@
     }
     
     [self switchPlayer];
+    
+    //if call button pressed, next player can't press raise or call
+    [_raiseButton setEnabled:FALSE];
+    [_callButton setEnabled:FALSE];
+    
+    [_betButton setEnabled:TRUE];
+    [_checkButton setEnabled:TRUE];
 }
 
 -(void) switchPlayer
@@ -198,6 +221,11 @@
 }
 
 - (void) displayWinnerLabel: (NSString*) victor{
+    //can't press any buttons if game over
+    [_raiseButton setEnabled:FALSE];
+    [_callButton setEnabled:FALSE];
+    [_checkButton setEnabled:FALSE];
+    [_betButton setEnabled:FALSE];
     
     [_winnerLabel setHidden:FALSE];
     
@@ -207,8 +235,11 @@
     NSString *displayText = [playerMsg stringByAppendingString:winnings];
     
     [_winnerLabel setText:displayText];
-    
-    [UIView animateWithDuration:3
+    [_winnerLabel setFont:[UIFont boldSystemFontOfSize: 25]];
+    _winnerLabel.transform = CGAffineTransformScale(_winnerLabel.transform, 5, 5);
+    _winnerLabel.center = CGPointMake(self.view.frame.size.width/1.5, self.view.frame.size.height-370);
+    [self.view addSubview:_winnerLabel];
+    [UIView animateWithDuration:2
                      animations:^{
                          _winnerLabel.transform = CGAffineTransformScale(_winnerLabel.transform, .2, .2);
                      } completion:^(BOOL finished) {
@@ -248,6 +279,12 @@
     [_moneyLabel setText:[NSString stringWithFormat:@"%ld", (long)[player1 money]]];
     [self displayHandType:player1];
     _lastBet = 0;
+    
+    //when next game starts, next player can't press raise/call
+    [_raiseButton setEnabled:FALSE];
+    [_callButton setEnabled:FALSE];
+    [_checkButton setEnabled:TRUE];
+    [_betButton setEnabled:TRUE];
 }
 
 - (void) populateHands
