@@ -164,6 +164,7 @@
 {
     _moneyLabel.font = [UIFont boldSystemFontOfSize:20];
     _moneyLabel.transform = CGAffineTransformScale(_moneyLabel.transform, 5, 5);
+    [self.view addSubview:_moneyLabel];
     [UIView animateWithDuration:0.5
                      animations:^{
                          _moneyLabel.transform = CGAffineTransformScale(_moneyLabel.transform, .2, .2);
@@ -177,6 +178,7 @@
 {
     _potLabel.font = [UIFont boldSystemFontOfSize:20];
     _potLabel.transform = CGAffineTransformScale(_potLabel.transform, 5, 5);
+    [self.view addSubview:_potLabel];
     [UIView animateWithDuration:0.5
                      animations:^{
                          _potLabel.transform = CGAffineTransformScale(_potLabel.transform, .2, .2);
