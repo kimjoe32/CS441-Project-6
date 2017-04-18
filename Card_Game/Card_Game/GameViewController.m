@@ -254,10 +254,12 @@
     NSInteger result = [player1 compareHandAgainst:player2]; // -1 = tie, 0 = player1 wins, 1 = player2 wins
     if (result == 0)
     {
+        [self displayWinnerLabel:@"Player 1"];
         [player1 addMoney:[self getPot] label: _moneyLabel];
     }
     else if (result == 1)
     {
+        [self displayWinnerLabel:@"Player 2"];
         [player2 addMoney:[self getPot] label: _moneyLabel];
     }
     
