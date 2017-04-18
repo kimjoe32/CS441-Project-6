@@ -246,6 +246,7 @@
     [_playerTurnLabel setText:@"Player 1"];
     [player1 setStoryboardCardsToThisPlayerCards:storyboardCards];
     [_moneyLabel setText:[NSString stringWithFormat:@"%ld", (long)[player1 money]]];
+    [self displayHandType:player1];
     _lastBet = 0;
 }
 

@@ -104,6 +104,11 @@ NSMutableDictionary * values;
 
 - (NSString*) checkHand
 {
+//    NSLog(@"%@ %@ %@ %@ %@", [cardsInHand objectAtIndex:0],
+//          [cardsInHand objectAtIndex:1] ,
+//          [cardsInHand objectAtIndex:2] ,
+//          [cardsInHand objectAtIndex:3] ,
+//          [cardsInHand objectAtIndex:4] );
     NSString* card0Num = [[cardsInHand objectAtIndex:0] substringToIndex:1];
     NSString* card1Num = [[cardsInHand objectAtIndex:1] substringToIndex:1];
     NSString* card2Num = [[cardsInHand objectAtIndex:2] substringToIndex:1];
@@ -151,8 +156,7 @@ NSMutableDictionary * values;
     
     //3 of a kind -- check first three or last 3 cards
     if ([card0Num isEqualToString:card1Num] &&
-        [card1Num isEqualToString:card2Num] &&
-        [card2Num isEqualToString:card3Num])
+        [card1Num isEqualToString:card2Num])
     {
         return @"3K";
     }
@@ -164,7 +168,7 @@ NSMutableDictionary * values;
     if ([card2Num isEqualToString:card3Num] &&
         [card3Num isEqualToString:card4Num])
     {
-        [cardsInHand exchangeObjectAtIndex:4 withObjectAtIndex:0];
+        [cardsInHand exchangeObjectAtIndex:0 withObjectAtIndex:4];
         [cardsInHand exchangeObjectAtIndex:1 withObjectAtIndex:3];
         return @"3K";
     }

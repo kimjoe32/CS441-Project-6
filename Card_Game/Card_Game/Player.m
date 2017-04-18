@@ -62,6 +62,7 @@
 - (NSString*) getHandType
 {
     [self hasHandType];
+//    NSLog(@"handType = %@", handType);
     return handType;
 }
 
