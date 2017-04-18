@@ -27,7 +27,7 @@
             card4: (Card*) card4
             card5: (Card*) card5;
 - (NSString*) checkHand;
-- (NSInteger) checkWinnerAgainst: (Hand*) p2;
+- (NSInteger) checkWinnerAgainst: (Hand*) p2 p1result: (NSString*) p1result p2result:(NSString*) p2result;
 - (NSInteger) compare: (NSString*) s1
                    s2: (NSString*) s2;
 - (void) clearHand;

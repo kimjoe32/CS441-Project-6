@@ -219,14 +219,10 @@ NSMutableDictionary * values;
     return ([values objectForKey:s1] < [values objectForKey:s2]);
 }
 
--(NSInteger) checkWinnerAgainst: (Hand*) p2
+- (NSInteger) checkWinnerAgainst: (Hand*) p2
+                        p1result: (NSString*) p1result
+                        p2result: (NSString*) p2result;
 {
-    NSString* p1result = [self checkHand];  //NSLog(@"%@", p1result);
-    NSString* p2result = [p2 checkHand];    //NSLog(@"%@", p2result);
-
-//    NSLog(@"%@ %@ %@ %@ %@", [cardsInHand objectAtIndex:0], [cardsInHand objectAtIndex:1], [cardsInHand objectAtIndex:2], [cardsInHand objectAtIndex:3], [cardsInHand objectAtIndex:4] );
-//    NSLog(@"%@ %@ %@ %@ %@", [p2.cardsInHand objectAtIndex:0], [p2.cardsInHand objectAtIndex:1], [p2.cardsInHand objectAtIndex:2], [p2.cardsInHand objectAtIndex:3], [p2.cardsInHand objectAtIndex:4] );
-    
     NSString* p1card0Num = [[cardsInHand objectAtIndex:0] substringToIndex:1];
     NSString* p1card1Num = [[cardsInHand objectAtIndex:1] substringToIndex:1];
     NSString* p1card2Num = [[cardsInHand objectAtIndex:2] substringToIndex:1];

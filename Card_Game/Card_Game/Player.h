@@ -11,6 +11,7 @@
 #import "Hand.h"
 @interface Player : NSObject
 @property (strong, nonatomic) Hand* hand;
+@property (strong, nonatomic) NSString* handType;
 @property (nonatomic) NSInteger money;
 
 -(Player*) init;
@@ -27,4 +28,5 @@
 - (NSInteger) compareHandAgainst: (Player*) player2;
 - (void) setStoryboardCardsToThisPlayerCards:(NSArray*) storyboardCards;
 - (void) printCards;
+- (NSString*) getHandType;
 @end
