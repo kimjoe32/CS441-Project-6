@@ -198,6 +198,7 @@
                         <outlet property="callButton" destination="Nv0-vc-OUA" id="EVo-HT-ei0"/>
                         <outlet property="checkButton" destination="zOa-t2-NSj" id="Tgl-ib-Wdc"/>
                         <outlet property="confirmBet" destination="3fg-Un-VqA" id="qvT-7D-sKq"/>
+                        <outlet property="handTypeLabel" destination="5oa-ql-Ksy" id="kwd-73-MwE"/>
                         <outlet property="moneyLabel" destination="EuW-O1-kn3" id="0zD-xG-ew9"/>
                         <outlet property="playerTurnLabel" destination="Tju-Gd-dIp" id="EZ3-p8-Fet"/>
                         <outlet property="potLabel" destination="FJR-Nd-mFg" id="Ytn-gI-XB1"/>

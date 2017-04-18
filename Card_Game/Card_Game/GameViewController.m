@@ -151,15 +151,22 @@
         [_playerTurnLabel setText:@"Player 1"];
         [player1 setStoryboardCardsToThisPlayerCards:storyboardCards];
         [_moneyLabel setText:[NSString stringWithFormat:@"%ld", (long)[player1 money]]];
+        [self displayHandType:player1];
     }
     else
     {
         [_playerTurnLabel setText:@"Player 2"];
         [player2 setStoryboardCardsToThisPlayerCards:storyboardCards];
         [_moneyLabel setText:[NSString stringWithFormat:@"%ld", (long)[player2 money]]];
+        [self displayHandType:player2];
     }
     
     [self animateMoneyLabel];
+}
+
+- (void) displayHandType: (Player*) p
+{
+    [_handTypeLabel setText:[p getHandType]];
 }
 
 - (void) animateMoneyLabel

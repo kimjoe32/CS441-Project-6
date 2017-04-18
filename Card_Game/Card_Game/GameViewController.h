@@ -48,6 +48,7 @@
 @property (nonatomic) bool checkBool;
 @property (strong, nonatomic) IBOutlet UILabel *playerTurnLabel;
 @property (nonatomic, strong) IBOutlet UILabel *winnerLabel;
+@property (strong, nonatomic) IBOutlet UILabel *handTypeLabel;
 
 - (void) decideWinner;
 - (void) switchPlayer;
